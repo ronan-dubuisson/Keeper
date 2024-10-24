@@ -14,6 +14,6 @@ export const NOTES: Note[] = [
   {
     id: 3,
     title: "woudjidjabad",
-    body: "This is some sorcery shit that i was aming in my react learning journey with Typescript!!!",
+    body: "This is some sorcery shit that i was aiming in my react learning journey with Typescript!!!",
   },
 ];
