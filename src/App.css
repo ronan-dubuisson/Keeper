@@ -20,6 +20,7 @@ header{
 }
 
 .note{
+    position: relative;
     margin: 16px;
     padding: 10px;
     background-color: #fff;
@@ -28,7 +29,22 @@ header{
     width: 240px;
     float: left;
     box-sizing: border-box;
+    cursor: pointer;
+    user-select: none;
 }
+
+.note-done{
+    text-decoration: line-through;
+}
+
+.note input[type="checkbox"]{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    margin-bottom: 10px;
+}
+
+
 
 .note h1{
     font-size: 1.1em;
@@ -36,12 +52,20 @@ header{
     box-sizing: border-box;
 }
 
-.note p{
+.note .content{
     font-size: 1.1em;
     white-space: pre-wrap;
     word-wrap: break-word;
     box-sizing: border-box;
     margin-bottom: 10px;
+}
+
+.note .time{
+    color: #ccc;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    font-size: 0.5em;
 }
 
 .footer {
