@@ -16,4 +16,10 @@ export const NOTES: Note[] = [
     title: "woudjidjabad",
     body: "This is some sorcery shit that i was aiming in my react learning journey with Typescript!!!",
   },
+  {
+    id: 4,
+    title:
+      "A very long title to test the any shorting on the default card size",
+    body: "This is some sorcery shit that i was aiming in my react learning journey with Typescript!!! and we just keep going on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and on and",
+  },
 ];

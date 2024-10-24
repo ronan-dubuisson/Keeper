@@ -11,7 +11,45 @@ header{
     padding: 16px 32px;
     background-color: #F5B915;
     color: #FFF;
+    text-align: center;
 }
+
+/*General classes*/
+.overflow-hidden{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.note-controls{
+    position: relative;
+    height: 25px;
+    border-bottom: 2px solid #555;
+}
+
+.note-controls > *{
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+}
+
+.note-toggle-full-size{
+    background-color: #fff;
+    color: #000;
+    position: absolute;
+    right: 0;
+}
+
+.note-body{
+    position: relative;
+    top: 0px;
+}
+
+/*Specific Targets*/
 
 .heading-title {
     margin-block: 0;
@@ -21,51 +59,64 @@ header{
 
 .note{
     position: relative;
-    margin: 16px;
     padding: 10px;
     background-color: #fff;
     border-radius: 7px;
     box-shadow: 0 2px 5px #ccc;
     width: 240px;
-    float: left;
+    height: 265px;
     box-sizing: border-box;
-    cursor: pointer;
-    user-select: none;
+    float: left;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .note-done{
     text-decoration: line-through;
 }
 
-.note input[type="checkbox"]{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    margin-bottom: 10px;
-}
-
-
-
 .note h1{
     font-size: 1.1em;
-    margin-bottom: 6px;
-    box-sizing: border-box;
+    margin: 10px;
 }
 
 .note .content{
-    font-size: 1.1em;
+    font-size: 1em;
     white-space: pre-wrap;
     word-wrap: break-word;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin: 10px;
+    display: -webkit-box;
+    line-clamp: 7;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    position: relative;
+    flex: 0 0 auto;
 }
 
-.note .time{
+.note-footer{
     color: #ccc;
+    height: auto;
+    position: relative;
+    flex: 1 1 auto;
+}
+.note-footer-trash{
+    margin: 0;
     position: absolute;
-    bottom: 0px;
-    right: 10px;
-    font-size: 0.5em;
+    left: 0;
+    bottom: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    left: 0;
+}
+
+.note-footer-date-time{
+    font-size: 0.7em;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
 }
 
 .footer {
