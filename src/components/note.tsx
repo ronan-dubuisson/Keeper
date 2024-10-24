@@ -12,6 +12,7 @@ function Note({ note }: Props) {
     return isDone ? "note note-done" : "note";
   }
 
+  //TODO: time = now at note creation time.
   return (
     <div
       className={setNoteClassNames()}
@@ -20,7 +21,7 @@ function Note({ note }: Props) {
       }}
     >
       <h1>{note.id + " - " + note.title}</h1>
-      <p>{note.body}</p>
+      <p className="content">{note.body}</p>
       <input type="checkbox" checked={isDone} readOnly />
       <p className="time">24/10/2024 16:59</p>
     </div>
