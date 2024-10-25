@@ -3,7 +3,6 @@ import {
   faSquareCheck,
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FaControlIcon from "../common/FaControlIcon";
 
 interface Props {
