@@ -7,6 +7,7 @@ import {
   faTrashCan,
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Note.module.css";
 
 interface Props {
   note: TNote;
