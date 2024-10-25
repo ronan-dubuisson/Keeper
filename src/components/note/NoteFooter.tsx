@@ -1,13 +1,13 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FaControlIcon from "../common/FaControlIcon";
 
 function NoteFooter() {
   return (
     <div className="note-footer">
-      <FontAwesomeIcon
-        className="note-footer-trash"
+      <FaControlIcon
         icon={faTrashCan}
-        onClick={() => {}}
+        onclick={() => {}}
+        className="note-footer-trash"
       />
       <p className="note-footer-date-time">24/10/2024 16:59</p>
     </div>

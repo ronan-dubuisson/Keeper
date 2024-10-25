@@ -4,6 +4,7 @@ import {
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FaControlIcon from "../common/FaControlIcon";
 
 interface Props {
   isDone: boolean;
@@ -12,26 +13,26 @@ interface Props {
 
 function NoteControls({ isDone, setIsDone }: Props) {
   return (
-    <div className="note-controls">
+    <div className="note-controls clickable-pointer">
       {isDone ? (
-        <FontAwesomeIcon
+        <FaControlIcon
           icon={faSquareCheck}
-          onClick={() => {
+          onclick={() => {
             setIsDone();
           }}
         />
       ) : (
-        <FontAwesomeIcon
+        <FaControlIcon
           icon={faSquare}
-          onClick={() => {
+          onclick={() => {
             setIsDone();
           }}
         />
       )}
-      <FontAwesomeIcon
-        className="note-toggle-full-size"
+      <FaControlIcon
+        className="note-toggle-full-size clickable-pointer"
         icon={faUpRightAndDownLeftFromCenter}
-        onClick={() => {}}
+        onclick={() => {}}
       />
     </div>
   );
