@@ -7,7 +7,6 @@ import {
   faTrashCan,
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
-import styles from "./Note.module.css";
 
 interface Props {
   note: TNote;
@@ -55,8 +54,8 @@ function Note({ note }: Props) {
         />
       </div>
       <div className="note-body">
-        <h1 className="overflow-hidden">{note.title}</h1>
-        <p className="content overflow-hidden">{note.content}</p>
+        <h1 className="note-header overflow-hidden">{note.title}</h1>
+        <p className="note-content overflow-hidden">{note.content}</p>
       </div>
       <div className="note-footer">
         <FaControlIcon
