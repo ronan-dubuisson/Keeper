@@ -14,9 +14,12 @@ interface Props {
 
 function Note({ note }: Props) {
   const [isDone, setIsDone] = useState(false);
+  const [isMouseOver, setMouseOver] = useState(false);
 
   function setNoteClassNames() {
-    return isDone ? "note note-done" : "note";
+    let classes: string = isDone ? "note note-done" : "note";
+    classes = isMouseOver ? classes.concat(" mouseover") : classes;
+    return classes;
   }
 
   function handleStateChange() {
@@ -24,8 +27,20 @@ function Note({ note }: Props) {
     // Call your API to update the note status here.
   }
 
+  function handleOnMouseOver() {
+    setMouseOver(true);
+  }
+
+  function handleOnMouseOut() {
+    setMouseOver(false);
+  }
+
   return (
-    <div className={setNoteClassNames()}>
+    <div
+      className={setNoteClassNames()}
+      onMouseOver={handleOnMouseOver}
+      onMouseOut={handleOnMouseOut}
+    >
       <div className="note-controls clickable-pointer">
         {isDone ? (
           <FaControlIcon icon={faSquareCheck} onclick={handleStateChange} />
