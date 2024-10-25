@@ -19,7 +19,6 @@ function Note({ note }: Props) {
     setIsDone(!isDone);
   }
 
-  //TODO: time = now at note creation time.
   return (
     <div className={setNoteClassNames()}>
       <NoteControls isDone={isDone} setIsDone={handleStateChange} />
