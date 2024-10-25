@@ -2,7 +2,7 @@ import { NOTES } from "../../data/notes";
 import { Note as TNote } from "../../types";
 import Note from "./Note";
 
-const NotesContainer = () => {
+function NotesContainer() {
   return (
     <div className="notes-container">
       {NOTES.map((note: TNote) => (
@@ -10,6 +10,6 @@ const NotesContainer = () => {
       ))}
     </div>
   );
-};
+}
 
 export default NotesContainer;
