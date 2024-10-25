@@ -1,8 +1,5 @@
 import { Note as TNote } from "../../types";
 import { useState } from "react";
-import NoteControls from "./NoteControls";
-import NoteBody from "./NoteBody";
-import NoteFooter from "./NoteFooter";
 import FaControlIcon from "../common/FaControlIcon";
 import {
   faSquare,
