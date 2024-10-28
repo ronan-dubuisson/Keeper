@@ -1,5 +1,5 @@
-import { Note as TNote } from "../../types";
 import { useState } from "react";
+import { Note as TNote } from "../../types";
 import FaControlIcon from "../common/FaControlIcon";
 import {
   faSquare,
