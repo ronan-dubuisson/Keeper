@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NOTES } from "../../data/notes";
-import { Note as TNote } from "../../types";
+import { TNote } from "../../types";
 import Note from "./Note";
 
 function NotesContainer() {

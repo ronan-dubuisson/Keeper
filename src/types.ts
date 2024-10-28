@@ -1,17 +1,17 @@
-export type Note = {
+export type TNote = {
   id: number;
   title: string;
   content: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AppwriteSession = { [key: string]: any } | null;
+export type TSession = object | null;
+export type TAccount = object | null;
 
-export type Context =
+export type TUserContext =
   | {
-      user: { [key: string]: string } | null;
-      login: (userName: string, password: string) => void;
-      register: () => void;
-      logout: (userInfo: { userId: string; sessionToken: string }) => void;
+      user: TAccount | null;
+      loginUser: (userName: string, password: string) => void;
+      registerUser: () => void;
+      logoutUser: () => void;
     }
   | undefined;

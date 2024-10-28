@@ -1,47 +1,59 @@
-import { Account, Client } from "appwrite";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { Context } from "../types";
-
-const AuthContext = createContext<Context>(undefined);
+import { TAccount, TUserContext } from "../types";
+import { account } from "../utils/appwriteConfig";
+const AuthContext = createContext<TUserContext>(undefined);
 
 type Props = PropsWithChildren;
-
+//TODO: convert const function to functions
 export const AuthProvider = ({ children }: Props) => {
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<TAccount>(null);
 
   useEffect(() => {
-    setLoading(false);
+    checkUserStatus();
   }, []);
 
-  const login = (userName: string, password: string) => {
-    const client = new Client();
-    const account = new Account(client);
+  async function loginUser(userName: string, password: string) {
+    setLoading(true);
 
-    const promise = account.createEmailPasswordSession(userName, password);
+    try {
+      //Create session with email and password (only 1 session per user, default settings appwrite)
+      await account.createEmailPasswordSession(userName, password);
+      //get user datails
+      const accountDetails = await account.get();
+      setUser(accountDetails);
+    } catch (error) {
+      logoutUser();
+      console.error(error); // Failure to login
+    }
 
-    promise.then(
-      function (response) {
-        console.log(response);
-        //setUser(response) // Success
-      },
-      function (error) {
-        console.log(error); // Failure
-      }
-    );
-  };
+    setLoading(false);
+  }
 
-  const register = () => {};
+  function registerUser() {}
 
-  const logout = (userInfo) => {};
+  function logoutUser() {
+    account.deleteSession("current");
+    setUser(null);
+  }
 
-  const checkUserStatus = () => {};
+  async function checkUserStatus() {
+    try {
+      //TODO: remove after testing
+      console.info("check status called");
+      const accountDetails = await account.get();
+      setUser(accountDetails);
+    } catch (error) {
+      console.error(error); // Failure to check user status
+    }
+    setLoading(false);
+  }
 
   const contextData = {
     user,
-    login,
-    register,
-    logout,
+    loginUser,
+    registerUser,
+    logoutUser,
   };
 
   return (

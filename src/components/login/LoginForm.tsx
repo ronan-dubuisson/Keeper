@@ -1,21 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Style from "./LoginForm.module.css";
 import cx from "classnames";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const { user, loginUser } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  });
   const [credentials, setCredentials] = useState({
     userName: "",
     password: "",
   });
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  const { login } = useAuth();
-
   //const navigate = useNavigate();
 
-  async function handleSubmit(e: { preventDefault: () => void }) {
-    login(credentials.userName, credentials.password);
+  function handleSubmit(e: { preventDefault: () => void }) {
+    e.preventDefault();
+    loginUser(credentials.userName, credentials.password);
   }
 
   function handleChange(e: { target: { value: string; name: string } }) {
