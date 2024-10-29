@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { NOTES } from "../../data/notes";
-import { TNote } from "../../types";
-import Note from "./Note";
+import { NoteType } from "../../types";
+import Note from "./note";
 
 function NotesContainer() {
   const [notes] = useState(NOTES);
 
   return (
     <div className="notes-container">
-      {notes.map((note: TNote) => (
+      {notes.map((note: NoteType) => (
         <Note key={note.id} note={note} />
       ))}
     </div>
