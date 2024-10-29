@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages";
 import Login from "./pages/login";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Error404 from "./pages/error pages/404";
+import ProtectedRoute from "./components/protectedRoute";
+import Error404 from "./pages/error-pages/404";
 
 export const router = createBrowserRouter([
   {

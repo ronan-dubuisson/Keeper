@@ -1,4 +1,4 @@
-import NotesContainer from "../components/note/NotesContainer";
+import NotesContainer from "@src/components/note/notesContainer";
 
 function Home() {
   return <NotesContainer />;

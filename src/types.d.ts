@@ -1,13 +1,13 @@
-export type TNote = {
+export type NoteType = {
   id: number;
   title: string;
   content: string;
 };
 
-export type TSession = object | null;
-export type TAccount = object | null;
+export type SessionType = object | null;
+export type AccountType = object | null;
 
-export type TUserContext =
+export type UserContextType =
   | {
       user: TAccount | null;
       loginUser: (userName: string, password: string) => void;

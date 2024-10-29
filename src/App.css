@@ -62,7 +62,7 @@ header{
     top: 0px;
 }
 
-.mouseover{
+.note:hover{
    outline: 4px solid #FFB703;
    outline-offset: -4px;
 }

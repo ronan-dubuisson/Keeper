@@ -1,13 +1,13 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { TAccount, TUserContext } from "../types";
-import { account } from "../utils/appwriteConfig";
-const AuthContext = createContext<TUserContext>(undefined);
+import { AccountType, UserContextType } from "@src/types";
+import { account } from "@utils/appwriteConfig";
+const AuthContext = createContext<UserContextType>(undefined);
 
 type Props = PropsWithChildren;
 //TODO: convert const function to functions
 export const AuthProvider = ({ children }: Props) => {
   const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState<TAccount>(null);
+  const [user, setUser] = useState<AccountType>(null);
 
   useEffect(() => {
     checkUserStatus();
