@@ -1,6 +1,6 @@
-import { Note } from "../types";
+import { NoteType } from "../types";
 
-export const NOTES: Note[] = [
+export const NOTES: NoteType[] = [
   {
     id: 1,
     title: "keep on",
