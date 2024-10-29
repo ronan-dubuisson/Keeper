@@ -1,14 +1,18 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Heading from "./components/Heading";
-import NotesContainer from "./components/note/NotesContainer";
+import { router } from "./router";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 function App() {
   return (
     <>
-      <Heading />
-      <NotesContainer />
-      <Footer />
+      <AuthProvider>
+        <Heading />
+        <RouterProvider router={router} />
+        <Footer />
+      </AuthProvider>
     </>
   );
 }
