@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NOTES } from "../../data/notes";
-import { NoteType } from "../../types";
-import Note from "./note";
+import { NoteType } from "@src/types";
+import Note from "@components/note/note";
 
 function NotesContainer() {
   const [notes] = useState(NOTES);
