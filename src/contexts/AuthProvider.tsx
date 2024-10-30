@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { AccountType, UserContextType } from "@src/types";
-import { account } from "@utils/appwriteConfig";
+import supabase from "@utils/supabaseConfig";
 const AuthContext = createContext<UserContextType>(undefined);
 
 type Props = PropsWithChildren;
@@ -17,11 +17,12 @@ export const AuthProvider = ({ children }: Props) => {
     setLoading(true);
 
     try {
-      //Create session with email and password (only 1 session per user, default settings appwrite)
-      await account.createEmailPasswordSession(userName, password);
-      //get user datails
-      const accountDetails = await account.get();
-      setUser(accountDetails);
+      const { data } = await supabase.auth.signInWithPassword({
+        email: userName,
+        password: password,
+      });
+
+      setUser(data.user);
     } catch (error) {
       logoutUser();
       console.error(error); // Failure to login
@@ -32,17 +33,21 @@ export const AuthProvider = ({ children }: Props) => {
 
   function registerUser() {}
 
-  function logoutUser() {
-    account.deleteSession("current");
-    setUser(null);
+  async function logoutUser() {
+    try {
+      await supabase.auth.signOut({ scope: "local" });
+      setUser(null);
+    } catch (error) {
+      console.error(error); // Failure to logout
+    }
   }
 
   async function checkUserStatus() {
     try {
-      //TODO: remove after testing
-      console.info("check status called");
-      const accountDetails = await account.get();
-      setUser(accountDetails);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
     } catch (error) {
       console.error(error); // Failure to check user status
     }
