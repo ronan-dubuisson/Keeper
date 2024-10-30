@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Style from "./LoginForm.module.css";
+import Style from "@components/login/LoginForm.module.css";
 import cx from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@hooks/useAuth";
