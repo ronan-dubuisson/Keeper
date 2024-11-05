@@ -4,12 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface Props {
   icon: IconDefinition;
   onclick: () => void;
-  className?: string;
+  isPointer?: boolean;
 }
 
-function control({ icon, onclick, className }: Props) {
+function control({ icon, onclick, isPointer }: Props) {
   return (
-    <FontAwesomeIcon icon={icon} onClick={onclick} className={className} />
+    <FontAwesomeIcon
+      icon={icon}
+      onClick={onclick}
+      className={isPointer !== undefined ? "cursor-pointer" : ""}
+    />
   );
 }
 

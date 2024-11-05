@@ -1,5 +1,4 @@
 import { RouterProvider } from "react-router-dom";
-import "@src/App.css";
 import Footer from "@components/footer";
 import Heading from "@components/heading";
 import { router } from "@src/router";
