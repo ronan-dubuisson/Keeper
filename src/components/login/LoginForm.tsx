@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Style from "@components/login/LoginForm.module.css";
 import cx from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@hooks/useAuth";
@@ -41,25 +40,15 @@ function LoginForm() {
   }
 
   return (
-    <div className={cx(Style.wrapper, Style.flex)}>
-      <form
-        onSubmit={handleSubmit}
-        className={cx(Style.flex, Style.flex_column, Style.loginForm)}
-      >
-        <div className={Style.formHeader}>
-          <h1 className={Style.formHeaderTitle}>Login</h1>
+    <div className="">
+      <form onSubmit={handleSubmit} className="">
+        <div className="">
+          <h1 className="">Login</h1>
         </div>
-        <div
-          className={cx(
-            Style.formBody,
-            Style.flex,
-            Style.flex_column,
-            Style.flex_gap_1
-          )}
-        >
+        <div className="">
           <input
             name="userName"
-            className={Style.loginInput}
+            className=""
             type="text"
             placeholder="Enter Username"
             value={credentials.userName}
@@ -69,7 +58,7 @@ function LoginForm() {
           />
           <input
             name="password"
-            className={cx(Style.loginInput)}
+            className=""
             type="password"
             placeholder="Enter Password"
             value={credentials.password}
@@ -79,12 +68,7 @@ function LoginForm() {
           />
           <button
             type="submit"
-            className={cx(
-              Style.loginButton,
-              isMouseOver
-                ? Style.loginButtonMouseOver
-                : Style.loginButtonMouseOut
-            )}
+            className=""
             onMouseOver={handleMouseOverLoginButton}
             onMouseOut={handleMouseOutLoginButton}
           >

@@ -1,18 +1,7 @@
-import { useAuth } from "@hooks/useAuth";
-
 function Footer() {
-  const { logoutUser } = useAuth();
-
-  function handleClickLogout() {
-    logoutUser();
-  }
-
   return (
-    <footer className="footer">
+    <footer className="color-primary sticky bg-amber text-center py-5 bottom-0 left-0 m-0 flex-col w-100vw text-white">
       <p>Copyright ⓒ {new Date().getFullYear()}</p>
-      <button onClick={handleClickLogout}>
-        <p>logout</p>
-      </button>
     </footer>
   );
 }
