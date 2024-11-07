@@ -7,8 +7,10 @@ function Heading() {
     logoutUser();
   }
   return (
-    <header className="flex flex-justify-between sticky m-0 top-0 px-10 left-0 text-center bg-amber color-primary">
-      <h1 className="m-0 py-5">Keeper</h1>
+    <header className="bg-primary-400 h-100px flex justify-start flex-items-center w-100vw">
+      <h1 className="color-primary-600 font-caveat font-bold font-size-title m-0 p-20px">
+        Notify
+      </h1>
       <button className="" onClick={handleClickLogout}>
         <p>logout</p>
       </button>

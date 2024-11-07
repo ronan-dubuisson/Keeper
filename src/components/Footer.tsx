@@ -1,7 +1,9 @@
 function Footer() {
   return (
-    <footer className="color-primary sticky bg-amber text-center py-5 bottom-0 left-0 m-0 flex-col w-100vw text-white">
-      <p>Copyright ⓒ {new Date().getFullYear()}</p>
+    <footer className="bg-primary-400 h-100px flex justify-center flex-items-center w-100vw mb-0">
+      <p className="font-caveat font-regular font-size-normal">
+        Copyright ⓒ {new Date().getFullYear()}
+      </p>
     </footer>
   );
 }

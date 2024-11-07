@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }: Props) => {
 
       setUser(data.user);
     } catch (error) {
-      logoutUser();
-      console.error(error); // Failure to login
+      await logoutUser();
+      console.log(error); // Failure to login
     }
 
     setLoading(false);
