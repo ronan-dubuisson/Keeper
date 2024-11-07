@@ -87,7 +87,7 @@ function LoginForm() {
         <div className="w-100%">
           {/* //TODO: change to react link component */}
           <div className="mb-5 flex flex-items-center before:content-[''] before:flex-1 before:h-1px before:bg-black after:content-[''] after:flex-1 after:h-1px after:bg-black">
-            <p className="m-0">Or sign in using</p>
+            <p className="m-0 mx-5">Or sign in using</p>
           </div>
           <div className="flex justify-center gap-40px">
             <FaIcon icon={faGoogle} brand={true} isPointer={true} />
