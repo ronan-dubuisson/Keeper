@@ -22,12 +22,9 @@ function control({
   //
   const iconClass = classNames(position, "left-0", {
     "cursor-pointer": isPointer,
-    "top-50%": input,
-    "left-13px": input,
-    "translate-y--50%": input,
-    "h-20px": input,
+    "top-50% left-13px translate-y--50% h-20px": input,
     "color-primary-600": input || brand,
-    "h-40px": brand,
+    "h-40px hover:color-secundary-300 hover:transition-300": brand,
   });
 
   return (

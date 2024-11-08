@@ -68,7 +68,7 @@ function LoginForm() {
             name={"password"}
             icon={faLock}
           />
-          <p className="m-0 mt-1 text-align-right font-size-normal underline cursor-pointer">
+          <p className="m-0 mt-1 text-align-right font-size-normal underline cursor-pointer hover:color-primary-400">
             Forgot password?
           </p>{" "}
         </div>
@@ -76,11 +76,13 @@ function LoginForm() {
           {/* TODO: change to react link component */}
           <button
             type="submit"
-            className=" m-1 cursor-pointer font-primary w-150px h-40px font-size-medium bg-secundary-300 border-rd-10px border-color-secundary-600 border-style-solid border-1px"
+            className="m-1 cursor-pointer font-primary w-150px h-40px font-size-medium
+             bg-secundary-300 border-rd-10px border-color-secundary-600 border-style-solid
+             border-1px hover:bg-primary-400 hover:transition"
           >
             login
           </button>
-          <p className="m-1 font-size-normal underline cursor-pointer">
+          <p className="m-1 font-size-normal underline cursor-pointer hover:color-primary-400">
             Don't have an account?
           </p>{" "}
         </div>
@@ -89,7 +91,7 @@ function LoginForm() {
           <div className="mb-5 flex flex-items-center before:content-[''] before:flex-1 before:h-1px before:bg-black after:content-[''] after:flex-1 after:h-1px after:bg-black">
             <p className="m-0 mx-5">Or sign in using</p>
           </div>
-          <div className="flex justify-center gap-40px">
+          <div className="flex justify-around flex-items-center">
             <FaIcon icon={faGoogle} brand={true} isPointer={true} />
             <FaIcon icon={faApple} brand={true} isPointer={true} />
             <FaIcon icon={faFacebook} brand={true} isPointer={true} />

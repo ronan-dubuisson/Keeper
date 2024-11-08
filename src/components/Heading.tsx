@@ -8,7 +8,7 @@ function Heading() {
   }
   return (
     <header className="bg-primary-400 h-100px flex justify-start flex-items-center w-100vw">
-      <h1 className="color-primary-600 font-caveat font-bold font-size-title m-0 p-20px">
+      <h1 className="color-primary-600 font-secundary font-bold font-size-title m-0 p-20px">
         Notify
       </h1>
       <button className="" onClick={handleClickLogout}>
