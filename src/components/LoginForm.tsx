@@ -11,6 +11,10 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
+/**
+ * Handles dynamic status of the login form
+ * @returns the login form
+ */
 function LoginForm() {
   const { user, loginUser } = useAuth();
   const navigate = useNavigate();
@@ -92,10 +96,10 @@ function LoginForm() {
             <p className="my-5 mx-5">Or sign in using</p>
           </div>
           <div className="flex justify-around flex-items-center">
-            <FaIcon icon={faGoogle} brand={true} isPointer={true} />
-            <FaIcon icon={faApple} brand={true} isPointer={true} />
-            <FaIcon icon={faFacebook} brand={true} isPointer={true} />
-            <FaIcon icon={faXTwitter} brand={true} isPointer={true} />
+            <FaIcon icon={faGoogle} brand={true} />
+            <FaIcon icon={faApple} brand={true} />
+            <FaIcon icon={faFacebook} brand={true} />
+            <FaIcon icon={faXTwitter} brand={true} />
           </div>
         </div>
       </form>
