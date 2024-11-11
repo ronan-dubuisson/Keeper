@@ -1,12 +1,12 @@
 import { useState } from "react";
-import FaControlIcon from "@components/common/faControlIcon";
+import FaControlIcon from "@src/components/ui/FaIcon";
 import {
   faSquareCheck,
   faTrashCan,
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
-import { NoteType } from "../../types";
+import { NoteType } from "../types";
 
 interface Props {
   note: NoteType;
@@ -22,26 +22,26 @@ function Note({ note }: Props) {
 
   return (
     <div
-      className={`note w-[15rem] h-[15rem] p-4 b-rounded-lg ${isDone ? "decoration-line-through" : ""} flex flex-col`}
+      className={`note w-15rem h-15rem p-4 b-rounded-lg ${isDone ? "decoration-line-through" : ""} flex flex-col`}
     >
       <div className="flex justify-between">
         {isDone ? (
           <FaControlIcon
             isPointer={true}
             icon={faSquareCheck}
-            onclick={handleStateChange}
+            onClick={handleStateChange}
           />
         ) : (
           <FaControlIcon
             icon={faSquare}
-            onclick={handleStateChange}
+            onClick={handleStateChange}
             isPointer={true}
           />
         )}
         <FaControlIcon
           isPointer={true}
           icon={faUpRightAndDownLeftFromCenter}
-          onclick={() => {}}
+          onClick={() => {}}
         />
       </div>
       <div>
@@ -49,7 +49,7 @@ function Note({ note }: Props) {
         <p className="text-size-base line-clamp-6">{note.content}</p>
       </div>
       <div className="flex justify-between mt-auto">
-        <FaControlIcon icon={faTrashCan} onclick={() => {}} isPointer={true} />
+        <FaControlIcon icon={faTrashCan} onClick={() => {}} isPointer={true} />
         <p className="m-0">24/10/2024 16:59</p>
       </div>
     </div>

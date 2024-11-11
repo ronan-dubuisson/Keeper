@@ -1,14 +1,25 @@
 import { useAuth } from "@src/hooks/useAuth";
+import classNames from "classnames";
 
-function Heading() {
+interface Props {
+  position?: "sticky" | "relative";
+}
+function Heading({ position = "relative" }: Props) {
   const { logoutUser } = useAuth();
 
   function handleClickLogout() {
     logoutUser();
   }
+
+  const cx = classNames({ "sticky top-0 z-1": position === "sticky" });
+
   return (
-    <header className="flex flex-justify-between sticky m-0 top-0 px-10 left-0 text-center bg-amber color-primary">
-      <h1 className="m-0 py-5">Keeper</h1>
+    <header
+      className={`${cx} bg-brand-primary-400 h-100px flex justify-start flex-items-center w-100vw border-b-1px border-brand border-b-solid`}
+    >
+      <h1 className="brand-primary-600 font-title font-bold font-size-title m-0 p-20px">
+        Notify
+      </h1>
       <button className="" onClick={handleClickLogout}>
         <p>logout</p>
       </button>

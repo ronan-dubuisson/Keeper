@@ -27,7 +27,8 @@
       "@contexts/*": ["src/contexts/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src"]

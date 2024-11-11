@@ -1,17 +1,58 @@
 import { defineConfig } from "unocss";
 import { presetUno } from "unocss";
+import { presetWebFonts } from "unocss";
 
 export default defineConfig({
   // ...UnoCSS options
-  presets: [presetUno],
+  presets: [
+    presetUno,
+    presetWebFonts({
+      provider: "google",
+      fonts: {
+        title: [
+          {
+            name: "Caveat",
+            weights: ["700"],
+          },
+        ],
+        primary: [
+          {
+            name: "Roboto",
+            weights: ["100", "400", "700"],
+          },
+        ],
+      },
+    }),
+  ],
+  theme: {
+    colors: {
+      brand: {
+        primary: {
+          400: "#387386", //class="bg-brand-primary-400"
+        },
+        secundary: {
+          300: "#B2974D", //class="bg-brand-secundary-300"
+          600: "#3B3115", //class="bg-brand-secundary-600"
+        },
+        DEFAULT: "#122D36", //class="bg-brand" (primary-600)
+      },
+    },
+  },
   preflights: [
     {
       getCSS: () => `
-        body {
-          background-color: #ccc;
-          padding: 0;
-          margin: 0;
-        }
+      body{
+        margin: 0;
+      }
+
+      #root {
+        background-color: #ccc;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
       `,
     },
   ],
@@ -24,7 +65,18 @@ export default defineConfig({
         color: "#023047ff",
       },
     ],
-    ["color-primary", { color: "#023047ff" }],
+    [
+      "login-form",
+      {
+        "box-shadow":
+          "4px 4px 10px rgba(36,79,92,0.5), -4px -4px 5px rgba(184, 229, 247,0.5) ",
+      },
+    ],
+    ["font-light", { "font-weight": "100" }],
+    ["font-regular", { "font-weight": "400" }],
+    ["font-bold", { "font-weight": "700" }],
+    ["font-size-title", { "font-size": "2.5rem" }],
+    ["font-size-medium", { "font-size": "1.5rem" }],
+    ["font-size-normal", { "font-size": "1rem" }],
   ],
-  // ...other options
 });
