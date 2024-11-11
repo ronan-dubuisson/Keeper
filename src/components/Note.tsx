@@ -11,7 +11,10 @@ import { NoteType } from "../types";
 interface Props {
   note: NoteType;
 }
-
+/**
+ * @param note - single note object
+ * @returns a single note
+ */
 function Note({ note }: Props) {
   const [isDone, setIsDone] = useState(false);
 

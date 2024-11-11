@@ -4,6 +4,11 @@ import classNames from "classnames";
 interface Props {
   position?: "sticky" | "relative";
 }
+/**
+ * return the heading element
+ * @param position - optional position - default is relative
+ * @returns the heading as jsx element
+ */
 function Heading({ position = "relative" }: Props) {
   const { logoutUser } = useAuth();
 
@@ -11,7 +16,7 @@ function Heading({ position = "relative" }: Props) {
     logoutUser();
   }
 
-  const cx = classNames({ "sticky top-0 z-1": position === "sticky" });
+  const cx = classNames(position, { "top-0 z-1": position === "sticky" });
 
   return (
     <header
