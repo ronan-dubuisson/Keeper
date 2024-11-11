@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FaControlIcon from "@src/components/ui/FaIcon";
+import FaControlIcon from "@src/components/ui/NoteControlIcon";
 import {
   faSquareCheck,
   faTrashCan,

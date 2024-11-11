@@ -1,5 +1,5 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import Icon from "@src/components/ui/FaIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   type: "text" | "password";
@@ -43,7 +43,12 @@ function InputText({
         onChange={onChange}
         autoComplete={name}
       ></input>
-      {icon && <Icon icon={icon} position="absolute" input={true} />}
+      {icon && (
+        <FontAwesomeIcon
+          className="absolute top-50% left-13px translate-y--50% h-20px"
+          icon={icon}
+        />
+      )}
     </div>
   );
 }
