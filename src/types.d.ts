@@ -10,7 +10,8 @@ export type AccountType = object | null;
 export type UserContextType =
   | {
       user: TAccount | null;
-      loginUser: (userName: string, password: string) => void;
+      loginWithPassword: (userName: string, password: string) => void;
+      oauthLogin: (provider: Provider) => void;
       registerUser: () => void;
       logoutUser: () => void;
     }

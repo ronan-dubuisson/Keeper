@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FaControlIcon from "@src/components/ui/FaIcon";
+import FaControlIcon from "@src/components/ui/NoteControlIcon";
 import {
   faSquareCheck,
   faTrashCan,
@@ -29,20 +29,11 @@ function Note({ note }: Props) {
     >
       <div className="flex justify-between">
         {isDone ? (
-          <FaControlIcon
-            isPointer={true}
-            icon={faSquareCheck}
-            onClick={handleStateChange}
-          />
+          <FaControlIcon icon={faSquareCheck} onClick={handleStateChange} />
         ) : (
-          <FaControlIcon
-            icon={faSquare}
-            onClick={handleStateChange}
-            isPointer={true}
-          />
+          <FaControlIcon icon={faSquare} onClick={handleStateChange} />
         )}
         <FaControlIcon
-          isPointer={true}
           icon={faUpRightAndDownLeftFromCenter}
           onClick={() => {}}
         />
@@ -52,7 +43,7 @@ function Note({ note }: Props) {
         <p className="text-size-base line-clamp-6">{note.content}</p>
       </div>
       <div className="flex justify-between mt-auto">
-        <FaControlIcon icon={faTrashCan} onClick={() => {}} isPointer={true} />
+        <FaControlIcon icon={faTrashCan} onClick={() => {}} />
         <p className="m-0">24/10/2024 16:59</p>
       </div>
     </div>
