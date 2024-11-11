@@ -1,6 +1,8 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { AccountType, UserContextType } from "@src/types";
 import supabase from "@utils/supabaseConfig";
+import { Provider } from "@supabase/supabase-js";
+
 const AuthContext = createContext<UserContextType>(undefined);
 
 type Props = PropsWithChildren;
@@ -13,7 +15,7 @@ export const AuthProvider = ({ children }: Props) => {
     checkUserStatus();
   }, []);
 
-  async function loginUser(userName: string, password: string) {
+  async function loginWithPassword(userName: string, password: string) {
     setLoading(true);
 
     try {
@@ -25,6 +27,25 @@ export const AuthProvider = ({ children }: Props) => {
       setUser(data.user);
     } catch (error) {
       logoutUser();
+      console.error(error); // Failure to login
+    }
+
+    setLoading(false);
+  }
+
+  async function oauthLogin(provider: Provider) {
+    setLoading(true);
+
+    try {
+      const { data } = await supabase.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: import.meta.env.VITE_BASE_URL,
+        },
+      });
+
+      console.log(data);
+    } catch (error) {
       console.error(error); // Failure to login
     }
 
@@ -56,7 +77,8 @@ export const AuthProvider = ({ children }: Props) => {
 
   const contextData = {
     user,
-    loginUser,
+    loginWithPassword,
+    oauthLogin,
     registerUser,
     logoutUser,
   };

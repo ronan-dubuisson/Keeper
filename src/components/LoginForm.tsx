@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@hooks/useAuth";
 import InputText from "@components/ui/InputText";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import FaIcon from "@components/ui/FaIcon";
+import BrandLoginIcon from "@components/ui/BrandLoginIcon";
 import {
   faApple,
   faFacebook,
@@ -16,7 +16,7 @@ import {
  * @returns the login form
  */
 function LoginForm() {
-  const { user, loginUser } = useAuth();
+  const { user, loginWithPassword } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function LoginForm() {
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     try {
-      loginUser(credentials.userName, credentials.password);
+      loginWithPassword(credentials.userName, credentials.password);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +77,6 @@ function LoginForm() {
           </p>{" "}
         </div>
         <div className="flex flex-col flex-items-center">
-          {/* TODO: change to react link component */}
           <button
             type="submit"
             className="m-1 cursor-pointer font-primary w-150px h-40px font-size-medium border-rd-10px border-style-solid border-1px
@@ -91,15 +90,14 @@ function LoginForm() {
           </p>{" "}
         </div>
         <div className="w-100%">
-          {/* //TODO: change to react link component */}
           <div className="mb-5 flex flex-items-center before:content-[''] before:flex-1 before:h-1px before:bg-black after:content-[''] after:flex-1 after:h-1px after:bg-black">
             <p className="my-5 mx-5">Or sign in using</p>
           </div>
           <div className="flex justify-around flex-items-center">
-            <FaIcon icon={faGoogle} brand={true} />
-            <FaIcon icon={faApple} brand={true} />
-            <FaIcon icon={faFacebook} brand={true} />
-            <FaIcon icon={faXTwitter} brand={true} />
+            <BrandLoginIcon name="google" icon={faGoogle} />
+            <BrandLoginIcon name="apple" icon={faApple} />
+            <BrandLoginIcon name="facebook" icon={faFacebook} />
+            <BrandLoginIcon name="twitter" icon={faXTwitter} />
           </div>
         </div>
       </form>
