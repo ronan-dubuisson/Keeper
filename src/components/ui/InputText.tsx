@@ -23,7 +23,8 @@ function InputText({
   return (
     <div className="relative">
       <input
-        className="font-size-normal my-1 pl-11 text-center w-410px h-45px font-primary border-[#122D36] border-1px border-rd-5px border-style-solid"
+        className="font-size-normal my-1 pl-11 text-center w-410px h-45px font-primary border-brand border-1px border-rd-5px border-style-solid
+         focus:outline-brand-secundary-300"
         name={name}
         type={type}
         placeholder={placeholder}

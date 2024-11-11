@@ -23,8 +23,9 @@ function control({
   const iconClass = classNames(position, "left-0", {
     "cursor-pointer": isPointer,
     "top-50% left-13px translate-y--50% h-20px": input,
-    "color-primary-600": input || brand,
-    "h-40px hover:color-secundary-300 hover:transition-300": brand,
+    "text-brand": input || brand,
+    "h-40px hover:text-brand-secundary-300 hover:transition-ease-out hover:transition-transform-300 hover:transform-scale-150":
+      brand,
   });
 
   return (

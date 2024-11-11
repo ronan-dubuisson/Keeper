@@ -7,12 +7,13 @@ import Footer from "@components/Footer";
 function Home() {
   return (
     <>
-      <Heading />
-      <div className="my-6 mx-[10%] flex flex-wrap gap-lg justify-center w-auto">
+      <Heading position="sticky" />
+      <div className="my-10 mx-10% flex flex-wrap gap-lg justify-center font-primary">
         {NOTES.map((note: NoteType) => (
           <Note key={note.id} note={note} />
         ))}
       </div>
+
       <Footer />
     </>
   );

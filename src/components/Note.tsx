@@ -22,7 +22,7 @@ function Note({ note }: Props) {
 
   return (
     <div
-      className={`note w-[15rem] h-[15rem] p-4 b-rounded-lg ${isDone ? "decoration-line-through" : ""} flex flex-col`}
+      className={`note w-15rem h-15rem p-4 b-rounded-lg ${isDone ? "decoration-line-through" : ""} flex flex-col`}
     >
       <div className="flex justify-between">
         {isDone ? (
