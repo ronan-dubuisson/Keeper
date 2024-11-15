@@ -9,6 +9,8 @@ export default defineConfig({
   plugins: [react(), UnoCSS({ presets: [presetUno] })],
   resolve: {
     alias: {
+      "@databaseTypes": path.resolve(__dirname, "./src/database.types.ts"),
+      "@root": path.resolve(__dirname, "./"),
       "@src": path.resolve(__dirname, "./src"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
       "@components": path.resolve(__dirname, "./src/components"),
