@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { NoteRow } from "@src/types";
+import { timestampPtzToNoteCard } from "@src/utils/helperFunctions";
 
 interface Props {
   note: NoteRow;
@@ -16,7 +17,7 @@ interface Props {
  * @returns a single note
  */
 function Note({ note }: Props) {
-  const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(note.is_done);
 
   function handleStateChange() {
     setIsDone(!isDone);
@@ -43,7 +44,9 @@ function Note({ note }: Props) {
       </div>
       <div className="flex justify-between mt-auto">
         <ControlIcon icon={faTrashCan} onClick={() => {}} />
-        <p className="m-0">24/10/2024 16:59</p>
+        <p className="m-0 font-size-small">
+          {timestampPtzToNoteCard(note.created_on)}
+        </p>
       </div>
     </div>
   );

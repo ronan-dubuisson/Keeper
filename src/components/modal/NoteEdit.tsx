@@ -32,6 +32,7 @@ function NoteEdit({ closeModal, addNote }: Props) {
     const newNote: NoteInsert = {
       ...note,
       user_uuid: user.id,
+      created_on: new Date().toISOString(),
     };
 
     const { data, error } = await supabase

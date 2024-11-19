@@ -78,5 +78,6 @@ export default defineConfig({
     ["font-size-title", { "font-size": "2.5rem" }],
     ["font-size-medium", { "font-size": "1.5rem" }],
     ["font-size-normal", { "font-size": "1rem" }],
+    ["font-size-small", { "font-size": "0.8rem" }],
   ],
 });
