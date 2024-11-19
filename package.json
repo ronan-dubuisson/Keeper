@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update-types": "npx supabase gen types --lang=typescript --project-id \"zleyqyvpqdivzhiacpzl\" > ./src/database.types.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -17,6 +18,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@supabase/supabase-js": "^2.46.1",
     "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -34,6 +36,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
+    "supabase": "^1.219.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
     "unocss": "^0.63.6",

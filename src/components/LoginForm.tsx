@@ -10,6 +10,7 @@ import {
   faGoogle,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import Button from "./ui/Button";
 
 /**
  * Handles dynamic status of the login form
@@ -17,6 +18,7 @@ import {
  */
 function LoginForm() {
   const { user, loginWithPassword } = useAuth();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,14 +79,7 @@ function LoginForm() {
           </p>{" "}
         </div>
         <div className="flex flex-col flex-items-center">
-          <button
-            type="submit"
-            className="m-1 cursor-pointer font-primary w-150px h-40px font-size-medium border-rd-10px border-style-solid border-1px
-             bg-brand-primary-400 text-brand border-brand 
-            hover:bg-brand-secundary-300 hover:transition"
-          >
-            Sign in
-          </button>
+          <Button value="Sign in" />
           <p className="m-1 font-size-normal underline cursor-pointer hover:text-brand-secundary-300">
             Don't have an account?
           </p>{" "}

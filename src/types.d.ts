@@ -1,12 +1,18 @@
-export type NoteType = {
-  id: number;
-  title: string;
-  content: string;
-};
+import { Tables, TablesInsert } from "@databaseTypes";
 
+/**
+ * Supabase general types
+ */
 export type SessionType = object | null;
 export type AccountType = object | null;
 
+/** supabase database types */
+export type NoteRow = Tables<"notes">
+export type NoteInsert = TablesInsert<"notes">
+
+/**
+ * context types
+ */
 export type UserContextType =
   | {
       user: TAccount | null;
