@@ -1,7 +1,9 @@
+import { ChangeEvent } from "react";
+
 interface Props {
   name: string;
   value: string;
-  onChange?: (e: { target: { value: string; name: string } }) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 function TextArea({ name, value, onChange }: Props) {
