@@ -1,10 +1,11 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChangeEvent } from "react";
 
 interface Props {
   type: "text" | "password";
   placeholder: string;
-  onChange?: (e: { target: { value: string; name: string } }) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   required?: boolean;
   name: string;
