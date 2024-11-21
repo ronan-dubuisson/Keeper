@@ -5,7 +5,7 @@ import LoginForm from "@components/LoginForm";
 function Login() {
   return (
     <>
-      <Heading />
+      <Heading renderNoteFunctions={false} />
       <LoginForm />
       <Footer />
     </>
