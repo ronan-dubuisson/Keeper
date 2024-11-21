@@ -5,13 +5,18 @@ import NoteFunctions from "@components/NoteFunctions";
 interface Props {
   position?: "sticky" | "relative";
   openModal?: () => void;
+  renderNoteFunctions: boolean;
 }
 /**
  * return the heading element
  * @param position - optional position - default is relative
  * @returns the heading as jsx element
  */
-function Heading({ position = "relative", openModal }: Props) {
+function Heading({
+  position = "relative",
+  openModal,
+  renderNoteFunctions = true,
+}: Props) {
   const { logoutUser } = useAuth();
 
   function handleClickLogout() {
@@ -32,7 +37,8 @@ function Heading({ position = "relative", openModal }: Props) {
           <p>logout</p>
         </button>
       </div>
-      <NoteFunctions openModal={openModal} />
+
+      {renderNoteFunctions && <NoteFunctions openModal={openModal} />}
     </header>
   );
 }
