@@ -29,7 +29,7 @@ function Heading({
     <header
       className={`${cx} color-brand bg-brand-primary-400 flex flex-col justify-start h-150px w-100vw border-b-1px border-brand border-b-solid`}
     >
-      <div className="flex flex-items-center">
+      <div className="flex">
         <h1 className="font-title font-bold font-size-title m-0 p-20px">
           Notify
         </h1>
