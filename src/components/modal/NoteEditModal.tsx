@@ -3,7 +3,7 @@ import InputText from "../ui/InputText";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextArea from "../ui/textArea";
 import Button from "../ui/Button";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
@@ -17,12 +17,14 @@ function NoteEditModal({ closeModal }: Props) {
   });
   const { insertNote } = useNotes();
 
-  function handleChange(e: { target: { value: string; name: string } }) {
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) {
     const { value, name } = e.target;
     setNote({ ...note, [name]: value });
   }
 
-  async function handleSubmit(e: { preventDefault: () => void }) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     insertNote(note.title, note.content);
     closeModal();

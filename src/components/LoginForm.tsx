@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@hooks/useAuth";
 import InputText from "@components/ui/InputText";
@@ -42,7 +42,7 @@ function LoginForm() {
     }
   }
 
-  function handleChange(e: { target: { value: string; name: string } }) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { value, name } = e.target;
 
     setCredentials({ ...credentials, [name]: value });
