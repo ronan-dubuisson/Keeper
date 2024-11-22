@@ -5,10 +5,16 @@ import NoteEditModal from "@src/components/modal/NoteEditModal";
 import { useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 import { NoteRow } from "@src/types";
+import { useQuery } from "react-query";
 
 function Home() {
   const [isNoteEditOpen, setNoteEditOpen] = useState(false);
-  const { notes, clearCurrentNote } = useNotes();
+  const { notes, clearCurrentNote, fetchNotes } = useNotes();
+
+  const { isLoading } = useQuery({
+    queryFn: () => fetchNotes(),
+    queryKey: "notes",
+  });
 
   function openNoteEditModal() {
     setNoteEditOpen(true);
@@ -17,6 +23,10 @@ function Home() {
   function closeNoteEditModal() {
     setNoteEditOpen(false);
     clearCurrentNote();
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (

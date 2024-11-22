@@ -1,35 +1,35 @@
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
-import { AccountType, UserContextType } from "@src/types";
+import { createContext, PropsWithChildren, useState } from "react";
+import { UserContextType } from "@src/types";
 import supabase from "@utils/supabaseConfig";
-import { Provider } from "@supabase/supabase-js";
+import { Provider, User } from "@supabase/supabase-js";
+import { useQuery } from "react-query";
 
 const AuthContext = createContext<UserContextType>(undefined);
 
 type Props = PropsWithChildren;
 //TODO: convert const function to functions
 export function AuthProvider({ children }: Props) {
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<AccountType>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User>();
 
-  useEffect(() => {
-    checkUserStatus();
+  useQuery({
+    queryFn: () => checkUserStatus(),
+    queryKey: "user",
   });
 
   async function loginWithPassword(userName: string, password: string) {
     setLoading(true);
 
-    try {
-      const { data } = await supabase.auth.signInWithPassword({
-        email: userName,
-        password: password,
-      });
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: userName,
+      password: password,
+    });
 
-      setUser(data.user);
-    } catch (error) {
-      logoutUser();
-      console.error(error); // Failure to login
+    if (error) {
+      throw error;
     }
 
+    setUser(data.user);
     setLoading(false);
   }
 
@@ -57,21 +57,19 @@ export function AuthProvider({ children }: Props) {
   async function logoutUser() {
     try {
       await supabase.auth.signOut({ scope: "local" });
-      setUser(null);
+      setUser(undefined);
     } catch (error) {
       console.error(error); // Failure to logout
     }
   }
 
   async function checkUserStatus() {
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    } catch (error) {
-      console.error(error); // Failure to check user status
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error) {
+      throw error;
     }
+    setUser(data.user);
     setLoading(false);
   }
 
@@ -85,7 +83,7 @@ export function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider value={contextData}>
-      {isLoading ? <p>LOADING....</p> : children}
+      {loading ? <p>LOADING....</p> : children}
     </AuthContext.Provider>
   );
 }
