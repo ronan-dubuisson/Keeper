@@ -5,7 +5,7 @@ import NoteFunctions from "@components/NoteFunctions";
 interface Props {
   position?: "sticky" | "relative";
   openModal?: () => void;
-  renderNoteFunctions: boolean;
+  renderNoteFunctions?: boolean;
 }
 /**
  * return the heading element

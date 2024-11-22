@@ -4,50 +4,30 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextArea from "../ui/textArea";
 import Button from "../ui/Button";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useAuth } from "@src/hooks/useAuth";
-import supabase from "@src/utils/supabaseConfig";
-import { NoteInsert, NoteRow } from "@src/types";
+import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
   closeModal: () => void;
-  addNote: (note: NoteRow) => void;
 }
 
-function NoteEdit({ closeModal, addNote }: Props) {
-  const { user } = useAuth();
+function NoteEditModal({ closeModal }: Props) {
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
+  const { insertNote } = useNotes();
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {
     const { value, name } = e.target;
-
     setNote({ ...note, [name]: value });
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
-
-    const newNote: NoteInsert = {
-      ...note,
-      user_uuid: user.id,
-      created_on: new Date().toISOString(),
-    };
-
-    const { data, error } = await supabase
-      .from("notes")
-      .insert([newNote])
-      .select();
-
-    if (data !== null) {
-      addNote(data[0]);
-      closeModal();
-    } else if (error) {
-      throw new Error("Note could note be added to the database!!!");
-    }
+    insertNote(note.title, note.content);
+    closeModal();
   }
 
   return (
@@ -79,4 +59,4 @@ function NoteEdit({ closeModal, addNote }: Props) {
   );
 }
 
-export default NoteEdit;
+export default NoteEditModal;
