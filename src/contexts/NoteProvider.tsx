@@ -90,7 +90,7 @@ export function NoteContextProvider({ children }: props) {
   }
 
   function formatTimeStamp(dateTime: string): string {
-    const formattedDate = format(dateTime, "dd/MM/yyyy HH:mm:ss");
+    const formattedDate = format(dateTime, "dd/MM/yyyy HH:mm");
     return formattedDate;
   }
 
