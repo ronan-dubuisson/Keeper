@@ -10,6 +10,7 @@ interface Props {
   required?: boolean;
   name: string;
   icon?: IconDefinition;
+  autoFocus?: boolean;
 }
 
 /**
@@ -30,6 +31,7 @@ function InputText({
   required = false,
   name,
   icon = undefined,
+  autoFocus = false,
 }: Props) {
   return (
     <div className="relative">
@@ -43,6 +45,7 @@ function InputText({
         required={required}
         onChange={onChange}
         autoComplete={name}
+        autoFocus={autoFocus}
       ></input>
       {icon && (
         <FontAwesomeIcon

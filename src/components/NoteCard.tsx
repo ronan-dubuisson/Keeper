@@ -11,19 +11,25 @@ import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
   note: NoteRow;
+  openNoteEdit: () => void;
 }
 /**
  * @param note - single note object
  * @returns a single note
  */
-function Note({ note }: Props) {
+function Note({ note, openNoteEdit }: Props) {
   const [isDone, setIsDone] = useState(note.is_done);
   const { formatTimeStamp } = useNotes();
-  const { updateNote } = useNotes();
+  const { updateNote, setEditNoteId } = useNotes();
 
   function handleStateChange() {
     setIsDone(!isDone);
     updateNote(note.id, { is_done: !note.is_done });
+  }
+
+  function handleEditNote() {
+    setEditNoteId(note.id);
+    openNoteEdit();
   }
 
   return (
@@ -37,7 +43,10 @@ function Note({ note }: Props) {
           icon={isDone ? faSquareCheck : faSquare}
           onClick={handleStateChange}
         />
-        <ControlIcon icon={faUpRightAndDownLeftFromCenter} onClick={() => {}} />
+        <ControlIcon
+          icon={faUpRightAndDownLeftFromCenter}
+          onClick={handleEditNote}
+        />
       </div>
       <div>
         <h1 className="text-size-xl line-clamp-2">{note.title}</h1>
