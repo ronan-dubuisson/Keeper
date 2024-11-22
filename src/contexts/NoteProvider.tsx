@@ -2,7 +2,7 @@ import { useAuth } from "@src/hooks/useAuth";
 import { NoteContextType, NoteInsert, NoteRow, NoteUpdate } from "@src/types";
 import supabase from "@src/utils/supabaseConfig";
 import { format } from "date-fns";
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, PropsWithChildren, useState } from "react";
 
 const NoteContext = createContext<NoteContextType>(undefined);
 type props = PropsWithChildren;
@@ -12,19 +12,15 @@ export function NoteContextProvider({ children }: props) {
   const [currentNoteToEdit, setCurrentNoteToEdit] = useState<NoteRow>();
   const { user } = useAuth();
 
-  useEffect(() => {
-    fetchNotes();
-  });
-
   async function fetchNotes() {
     if (user) {
       const { data, error } = await supabase.from("notes").select();
 
       if (error) {
-        throw new Error(error.message);
-      } else {
-        setNotes(data);
+        throw error;
       }
+
+      setNotes(data);
     } else {
       throw Error("user needs to be logged in before fetching notes");
     }
@@ -96,6 +92,7 @@ export function NoteContextProvider({ children }: props) {
 
   const contextData = {
     notes,
+    fetchNotes,
     currentNoteToEdit,
     insertNote,
     setEditNoteId,
