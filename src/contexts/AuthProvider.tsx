@@ -7,13 +7,13 @@ const AuthContext = createContext<UserContextType>(undefined);
 
 type Props = PropsWithChildren;
 //TODO: convert const function to functions
-export const AuthProvider = ({ children }: Props) => {
-  const [isLoading, setLoading] = useState(true);
+export function AuthProvider({ children }: Props) {
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<AccountType>(null);
 
   useEffect(() => {
     checkUserStatus();
-  }, []);
+  });
 
   async function loginWithPassword(userName: string, password: string) {
     setLoading(true);
@@ -88,6 +88,6 @@ export const AuthProvider = ({ children }: Props) => {
       {isLoading ? <p>LOADING....</p> : children}
     </AuthContext.Provider>
   );
-};
+}
 
 export default AuthContext;

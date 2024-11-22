@@ -1,15 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages";
+import Index from "./pages";
 import Login from "./pages/login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Error404 from "./pages/error-pages/404";
+import { NoteContextProvider } from "./contexts/NoteProvider";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <ProtectedRoute>
-        <Home />
+        <NoteContextProvider>
+          <Index />
+        </NoteContextProvider>
       </ProtectedRoute>
     ),
   },

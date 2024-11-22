@@ -1,4 +1,4 @@
-import { Tables, TablesInsert } from "@databaseTypes";
+import { Tables, TablesInsert, TablesUpdate } from "@databaseTypes";
 
 /**
  * Supabase general types
@@ -9,12 +9,13 @@ export type AccountType = object | null;
 /** supabase database types */
 export type NoteRow = Tables<"notes">
 export type NoteInsert = TablesInsert<"notes">
+export type NoteUpdate = TablesUpdate<"notes">
 
 /**
  * context types
  */
 export type UserContextType =
-  | {
+  {
       user: TAccount | null;
       loginWithPassword: (userName: string, password: string) => void;
       oauthLogin: (provider: Provider) => void;
@@ -22,3 +23,11 @@ export type UserContextType =
       logoutUser: () => void;
     }
   | undefined;
+
+  export type NoteContextType = {
+    notes: NoteRow[];
+    insertNote: (title:string, content:string) => Promise<void>;
+    updateNote: (id: string, fieldsToUpdate: NoteUpdate) => Promise<noteRow>;
+    formatTimeStamp: (dateTime:string) => string
+  }
+  | undefined

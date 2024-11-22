@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { NoteRow } from "@src/types";
-import { timestampPtzToNoteCard } from "@src/utils/helperFunctions";
+import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
   note: NoteRow;
@@ -18,10 +18,12 @@ interface Props {
  */
 function Note({ note }: Props) {
   const [isDone, setIsDone] = useState(note.is_done);
+  const { formatTimeStamp } = useNotes();
+  const { updateNote } = useNotes();
 
   function handleStateChange() {
     setIsDone(!isDone);
-    // Call your API to update the note status here.
+    updateNote(note.id, { is_done: !note.is_done });
   }
 
   return (
@@ -31,11 +33,10 @@ function Note({ note }: Props) {
       } flex flex-col`}
     >
       <div className="flex justify-between">
-        {isDone ? (
-          <ControlIcon icon={faSquareCheck} onClick={handleStateChange} />
-        ) : (
-          <ControlIcon icon={faSquare} onClick={handleStateChange} />
-        )}
+        <ControlIcon
+          icon={isDone ? faSquareCheck : faSquare}
+          onClick={handleStateChange}
+        />
         <ControlIcon icon={faUpRightAndDownLeftFromCenter} onClick={() => {}} />
       </div>
       <div>
@@ -45,7 +46,7 @@ function Note({ note }: Props) {
       <div className="flex justify-between mt-auto">
         <ControlIcon icon={faTrashCan} onClick={() => {}} />
         <p className="m-0 font-size-small">
-          {timestampPtzToNoteCard(note.created_on)}
+          {formatTimeStamp(note.created_on)}
         </p>
       </div>
     </div>
