@@ -7,15 +7,15 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
-  closeModal: () => void;
+  closeNoteEditModal: () => void;
 }
 
-function NoteEditModal({ closeModal }: Props) {
+function NoteEditModal({ closeNoteEditModal }: Props) {
+  const { insertNote, currentNoteToEdit, updateNote } = useNotes();
   const [note, setNote] = useState({
-    title: "",
-    content: "",
+    title: currentNoteToEdit?.title ? currentNoteToEdit.title : "",
+    content: currentNoteToEdit?.content ? currentNoteToEdit.content : "",
   });
-  const { insertNote } = useNotes();
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -26,8 +26,16 @@ function NoteEditModal({ closeModal }: Props) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
-    insertNote(note.title, note.content);
-    closeModal();
+    if (currentNoteToEdit) {
+      updateNote(currentNoteToEdit.id, {
+        title: note.title,
+        content: note.content,
+      });
+    } else {
+      insertNote(note.title, note.content);
+    }
+
+    closeNoteEditModal();
   }
 
   return (
@@ -41,18 +49,24 @@ function NoteEditModal({ closeModal }: Props) {
             className=" color-brand"
             icon={faXmark}
             size="lg"
-            onClick={closeModal}
+            onClick={closeNoteEditModal}
           />
         </div>
         <InputText
           type="text"
           required={true}
           name="title"
-          placeholder="Give the note a title"
+          placeholder="Enter a note a title"
           onChange={handleChange}
           value={note.title}
+          autoFocus={true}
         />
-        <TextArea name="content" value={note.content} onChange={handleChange} />
+        <TextArea
+          name="content"
+          value={note.content}
+          placeholder="Enter some content here"
+          onChange={handleChange}
+        />
         <Button value="Save note" />
       </form>
     </div>

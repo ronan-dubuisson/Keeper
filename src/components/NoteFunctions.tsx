@@ -8,7 +8,7 @@ interface Props {
 function NoteControls({ openModal }: Props) {
   return (
     <div className="flex flex-justify-center w-100%">
-      <div className="cursor-pointer border-rd-50% bg-brand-primary-400 hover:bg-brand-secundary-300 border-brand border-1px border-solid translate-y-50%">
+      <div className="cursor-pointer border-rd-50% bg-brand-primary-400 hover:bg-brand-secundary-300 border-brand border-1px border-solid outline-solid outline-10px outline-#ccc translate-y-50%">
         <FontAwesomeIcon
           icon={faPlus}
           className="m-3"

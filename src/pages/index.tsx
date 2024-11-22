@@ -7,31 +7,40 @@ import { useNotes } from "@src/hooks/useNotes";
 import { NoteRow } from "@src/types";
 
 function Home() {
-  const [isNewNoteModal, setNewNoteModal] = useState(false);
-  const { notes } = useNotes();
+  const [isNoteEditOpen, setNoteEditOpen] = useState(false);
+  const { notes, clearCurrentNote } = useNotes();
 
-  function openModal() {
-    setNewNoteModal(true);
+  function openNoteEditModal() {
+    setNoteEditOpen(true);
   }
 
-  function closeModal() {
-    setNewNoteModal(false);
+  function closeNoteEditModal() {
+    setNoteEditOpen(false);
+    clearCurrentNote();
   }
 
   return (
     <>
       <div className="h-100vh flex flex-col">
-        <Heading position="sticky" openModal={openModal} />
+        <Heading position="sticky" openModal={openNoteEditModal} />
         <div>
           <div className="my-10 mx-10% flex flex-wrap gap-lg justify-start font-primary">
             {notes.length > 0 &&
-              notes.map((note: NoteRow) => <Note key={note.id} note={note} />)}
+              notes.map((note: NoteRow) => (
+                <Note
+                  key={note.id}
+                  note={note}
+                  openNoteEdit={openNoteEditModal}
+                />
+              ))}
           </div>
         </div>
         <Footer />
       </div>
 
-      {isNewNoteModal && <NoteEditModal closeModal={closeModal} />}
+      {isNoteEditOpen && (
+        <NoteEditModal closeNoteEditModal={closeNoteEditModal} />
+      )}
     </>
   );
 }

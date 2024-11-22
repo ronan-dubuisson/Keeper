@@ -9,6 +9,7 @@ type props = PropsWithChildren;
 
 export function NoteContextProvider({ children }: props) {
   const [notes, setNotes] = useState<NoteRow[]>([]);
+  const [currentNoteToEdit, setCurrentNoteToEdit] = useState<NoteRow>();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -27,11 +28,6 @@ export function NoteContextProvider({ children }: props) {
     } else {
       throw Error("user needs to be logged in before fetching notes");
     }
-  }
-
-  function formatTimeStamp(dateTime: string): string {
-    const formattedDate = format(dateTime, "dd/MM/yyyy HH:mm:ss");
-    return formattedDate;
   }
 
   async function insertNote(title: string, content: string) {
@@ -60,6 +56,20 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
+  function setEditNoteId(id: string) {
+    const note = notes.find((note) => note?.id === id);
+
+    if (note) {
+      setCurrentNoteToEdit(note);
+    } else {
+      throw Error(`note with id:${id} does not exist`);
+    }
+  }
+
+  function clearCurrentNote() {
+    setCurrentNoteToEdit(undefined);
+  }
+
   async function updateNote(id: string, fieldsToUpdate: NoteUpdate) {
     if (user) {
       const { data, error } = await supabase
@@ -79,9 +89,17 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
+  function formatTimeStamp(dateTime: string): string {
+    const formattedDate = format(dateTime, "dd/MM/yyyy HH:mm:ss");
+    return formattedDate;
+  }
+
   const contextData = {
     notes,
+    currentNoteToEdit,
     insertNote,
+    setEditNoteId,
+    clearCurrentNote,
     updateNote,
     formatTimeStamp,
   };
