@@ -11,24 +11,17 @@ function Home() {
   const [isNoteEditOpen, setNoteEditOpen] = useState(false);
   const { notes, clearCurrentNote, fetchNotes } = useNotes();
 
-  const { isLoading } = useQuery({
+  /** FETCH NOTES TO NOTES CONTEXT WITH REACT-QUERY*/
+  const notesQuery = useQuery({
     queryFn: () => fetchNotes(),
-    queryKey: "notes",
+    queryKey: ["notes"],
   });
 
-  function openNoteEditModal() {
-    setNoteEditOpen(true);
-  }
-
-  function closeNoteEditModal() {
-    setNoteEditOpen(false);
-    clearCurrentNote();
-  }
-
-  if (isLoading) {
+  if (notesQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
+  // on query completed
   return (
     <>
       <div className="h-100vh flex flex-col">
@@ -53,6 +46,16 @@ function Home() {
       )}
     </>
   );
+
+  /**HELPER FUNCTION*/
+  function openNoteEditModal() {
+    setNoteEditOpen(true);
+  }
+
+  function closeNoteEditModal() {
+    setNoteEditOpen(false);
+    clearCurrentNote();
+  }
 }
 
 export default Home;
