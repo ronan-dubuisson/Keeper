@@ -14,7 +14,7 @@ export function AuthProvider({ children }: Props) {
 
   useQuery({
     queryFn: () => checkUserStatus(),
-    queryKey: "user",
+    queryKey: ["user"],
   });
 
   async function loginWithPassword(userName: string, password: string) {
