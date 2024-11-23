@@ -7,10 +7,10 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
-  closeNoteEditModal: () => void;
+  closeModal: () => void;
 }
 
-function NoteEditModal({ closeNoteEditModal }: Props) {
+function NoteEditModal({ closeModal }: Props) {
   const { insertNote, currentNoteToEdit, updateNote } = useNotes();
   const [note, setNote] = useState({
     title: currentNoteToEdit?.title ? currentNoteToEdit.title : "",
@@ -35,7 +35,7 @@ function NoteEditModal({ closeNoteEditModal }: Props) {
       insertNote(note.title, note.content);
     }
 
-    closeNoteEditModal();
+    closeModal();
   }
 
   return (
@@ -49,7 +49,7 @@ function NoteEditModal({ closeNoteEditModal }: Props) {
             className=" color-brand"
             icon={faXmark}
             size="lg"
-            onClick={closeNoteEditModal}
+            onClick={closeModal}
           />
         </div>
         <InputText

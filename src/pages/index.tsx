@@ -27,7 +27,7 @@ function Home() {
       <div className="h-100vh flex flex-col">
         <Heading position="sticky" openModal={openNoteEditModal} />
         <div>
-          <div className="my-10 mx-10% flex flex-wrap gap-lg justify-start font-primary">
+          <div className="my-10 mx-10% flex flex-wrap gap-lg justify-center font-primary">
             {notes.length > 0 &&
               notes.map((note: NoteRow) => (
                 <Note
@@ -41,9 +41,7 @@ function Home() {
         <Footer />
       </div>
 
-      {isNoteEditOpen && (
-        <NoteEditModal closeNoteEditModal={closeNoteEditModal} />
-      )}
+      {isNoteEditOpen && <NoteEditModal closeModal={closeNoteEditModal} />}
     </>
   );
 
