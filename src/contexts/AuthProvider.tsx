@@ -67,8 +67,10 @@ export function AuthProvider({ children }: Props) {
     const { data, error } = await supabase.auth.getUser();
 
     if (error) {
+      setLoading(false);
       throw error;
     }
+
     setUser(data.user);
     setLoading(false);
   }
