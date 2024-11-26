@@ -28,11 +28,14 @@ export function NoteContextProvider({ children }: props) {
 
   async function insertNote(title: string, content: string) {
     if (user) {
+      const createdDate = new Date().toISOString();
+
       const newNote: NoteInsert = {
         title,
         content,
         user_uuid: user.id,
-        created_on: new Date().toISOString(),
+        created_on: createdDate,
+        last_updated_on: createdDate,
       };
 
       const { data, error } = await supabase

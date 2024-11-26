@@ -13,6 +13,7 @@ function AlertModal({
   isOpen,
   closeModal,
 }: Props) {
+
   const timer = useQuery({
     queryKey: ["timer"],
     queryFn: () => delay(timeToDisplayMilliSeconds),
