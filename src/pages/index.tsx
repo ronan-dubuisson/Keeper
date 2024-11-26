@@ -25,7 +25,7 @@ function Home() {
   return (
     <>
       <div className="h-100vh flex flex-col">
-        <Heading position="sticky" openModal={openNoteEditModal} />
+        <Heading position="sticky" openModal={() => setNoteEditOpen(true)} />
         <div>
           <div className="my-10 mx-10% flex flex-wrap gap-lg justify-center font-primary">
             {notes.length > 0 &&
@@ -33,7 +33,7 @@ function Home() {
                 <Note
                   key={note.id}
                   note={note}
-                  openNoteEdit={openNoteEditModal}
+                  openNoteEdit={() => setNoteEditOpen(true)}
                 />
               ))}
           </div>
@@ -41,19 +41,15 @@ function Home() {
         <Footer />
       </div>
 
-      {isNoteEditOpen && <NoteEditModal closeModal={closeNoteEditModal} />}
+      <NoteEditModal
+        isOpen={isNoteEditOpen}
+        closeModal={() => {
+          setNoteEditOpen(false);
+          clearCurrentNote();
+        }}
+      />
     </>
   );
-
-  /**HELPER FUNCTION*/
-  function openNoteEditModal() {
-    setNoteEditOpen(true);
-  }
-
-  function closeNoteEditModal() {
-    setNoteEditOpen(false);
-    clearCurrentNote();
-  }
 }
 
 export default Home;
