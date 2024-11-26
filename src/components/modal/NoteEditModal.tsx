@@ -39,7 +39,7 @@ function NoteEditModal({ closeNoteEditModal }: Props) {
   }
 
   return (
-    <div className="w-100% h-100% flex flex-justify-center flex-items-center bg-#ccc backdrop-blur bg-opacity-70 fixed z-10">
+    <div className="w-100% h-100% flex flex-justify-center flex-items-center bg-brand backdrop-blur bg-opacity-70 fixed z-10">
       <form
         onSubmit={handleSubmit}
         className="bg-white border-solid border-rd-10px border-1px w-550px flex flex-col flex-justify-start flex-items-center p-10 color-brand relative"
