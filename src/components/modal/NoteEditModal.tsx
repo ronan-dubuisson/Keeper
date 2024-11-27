@@ -7,10 +7,11 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
+  isOpen: boolean;
   closeModal: () => void;
 }
 
-function NoteEditModal({ closeModal }: Props) {
+function NoteEditModal({ isOpen, closeModal }: Props) {
   const { insertNote, currentNoteToEdit, updateNote } = useNotes();
   const [note, setNote] = useState({
     title: currentNoteToEdit?.title ? currentNoteToEdit.title : "",
@@ -37,6 +38,8 @@ function NoteEditModal({ closeModal }: Props) {
 
     closeModal();
   }
+
+  if (!isOpen) return null;
 
   return (
     <div className="w-100% h-100% flex flex-justify-center flex-items-center bg-brand backdrop-blur bg-opacity-70 fixed z-10">

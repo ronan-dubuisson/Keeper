@@ -8,6 +8,7 @@ import {
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { NoteRow } from "@src/types";
 import { useNotes } from "@src/hooks/useNotes";
+import Border from "./ui/branding/Border";
 
 interface Props {
   note: NoteRow;
@@ -19,6 +20,7 @@ interface Props {
  */
 function Note({ note, openNoteEdit }: Props) {
   const [isDone, setIsDone] = useState(note.is_done);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const { formatTimeStamp } = useNotes();
   const { updateNote, setEditNoteId } = useNotes();
 
@@ -33,34 +35,38 @@ function Note({ note, openNoteEdit }: Props) {
   }
 
   return (
-    <div
-      className={`note w-15rem h-15rem p-4 b-rounded-lg ${
-        isDone ? "decoration-line-through" : ""
-      } flex flex-col`}
-    >
-      <div className="flex justify-between">
-        <ControlIcon
-          icon={isDone ? faSquareCheck : faSquare}
-          onClick={handleStateChange}
-        />
-        <ControlIcon
-          icon={faUpRightAndDownLeftFromCenter}
-          onClick={handleEditNote}
-        />
+    <Border highlight={isMouseOver}>
+      <div
+        className={`note w-15rem h-15rem p-4 b-rounded-lg ${
+          isDone ? "decoration-line-through" : ""
+        } flex flex-col`}
+        onMouseEnter={() => setIsMouseOver(true)}
+        onMouseLeave={() => setIsMouseOver(false)}
+      >
+        <div className="flex justify-between">
+          <ControlIcon
+            icon={isDone ? faSquareCheck : faSquare}
+            onClick={handleStateChange}
+          />
+          <ControlIcon
+            icon={faUpRightAndDownLeftFromCenter}
+            onClick={handleEditNote}
+          />
+        </div>
+        <div>
+          <h1 className="text-size-xl line-clamp-2">{note.title}</h1>
+          <p className="text-size-base line-clamp-6">{note.content}</p>
+        </div>
+        <div className="flex justify-between mt-auto">
+          <ControlIcon icon={faTrashCan} onClick={() => {}} />
+          <p className="m-0 font-size-small">
+            {formatTimeStamp(
+              note.last_updated_on ? note.last_updated_on : note.created_on
+            )}
+          </p>
+        </div>
       </div>
-      <div>
-        <h1 className="text-size-xl line-clamp-2">{note.title}</h1>
-        <p className="text-size-base line-clamp-6">{note.content}</p>
-      </div>
-      <div className="flex justify-between mt-auto">
-        <ControlIcon icon={faTrashCan} onClick={() => {}} />
-        <p className="m-0 font-size-small">
-          {formatTimeStamp(
-            note.last_updated_on ? note.last_updated_on : note.created_on
-          )}
-        </p>
-      </div>
-    </div>
+    </Border>
   );
 }
 

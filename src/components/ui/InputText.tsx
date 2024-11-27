@@ -1,6 +1,7 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
+import Border from "./branding/Border";
 
 interface Props {
   type: "text" | "password";
@@ -33,26 +34,32 @@ function InputText({
   icon = undefined,
   autoFocus = false,
 }: Props) {
+  const [isFocus, setIsFocus] = useState(false);
+
   return (
-    <div className="relative">
-      <input
-        className="font-size-normal my-1 pl-11 text-center w-410px h-45px font-primary border-brand border-1px border-rd-5px border-style-solid
-         focus:outline-brand-secundary-300"
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        required={required}
-        onChange={onChange}
-        autoComplete={name}
-        autoFocus={autoFocus}
-      ></input>
-      {icon && (
-        <FontAwesomeIcon
-          className="absolute top-50% left-13px translate-y--50% h-20px"
-          icon={icon}
-        />
-      )}
+    <div className="relative my-3">
+      <Border highlight={isFocus}>
+        <input
+          className="pl-11 font-size-normal border-none outline-none text-center w-410px h-45px font-primary "
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          required={required}
+          onChange={onChange}
+          autoComplete={name}
+          autoFocus={autoFocus}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+        ></input>
+
+        {icon && (
+          <FontAwesomeIcon
+            className="absolute top-50% left-13px translate-y--50% h-20px"
+            icon={icon}
+          />
+        )}
+      </Border>
     </div>
   );
 }
