@@ -9,7 +9,7 @@ interface Props {
 }
 
 function BrandLoginIcon({ icon, name }: Props) {
-  const { user, oauthLogin } = useAuth();
+  const { oauthLogin } = useAuth();
 
   function handleOauthLogin() {
     oauthLogin(name);

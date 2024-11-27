@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import Border from "../ui/branding/Border";
 
 interface Props {
   message: string;
@@ -13,7 +14,6 @@ function AlertModal({
   isOpen,
   closeModal,
 }: Props) {
-
   const timer = useQuery({
     queryKey: ["timer"],
     queryFn: () => delay(timeToDisplayMilliSeconds),
@@ -24,10 +24,10 @@ function AlertModal({
   if (!isOpen) return null;
 
   return (
-    <div className="flex justify-center">
-      <div className="bg-brand-primary-400 text-brand fixed mt-20px top-150px">
-        {message}
-      </div>
+    <div className="fixed top-150px flex justify-center w-100vw">
+      <Border>
+        <div className="text-brand fixed mt-20px">{message}</div>
+      </Border>
     </div>
   );
 

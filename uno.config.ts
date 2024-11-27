@@ -66,7 +66,7 @@ export default defineConfig({
       },
     ],
     [
-      "login-form",
+      "shadow-brand",
       {
         "box-shadow":
           "4px 4px 10px rgba(36,79,92,0.5), -4px -4px 5px rgba(184, 229, 247,0.5) ",
