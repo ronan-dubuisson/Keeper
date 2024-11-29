@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useState } from "react";
-import Border from "./branding/Border";
+import Border from "./Border";
 
 interface Props {
   type: "text" | "password";

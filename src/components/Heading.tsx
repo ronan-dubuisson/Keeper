@@ -1,11 +1,13 @@
-import { useAuth } from "@src/hooks/useAuth";
-import classNames from "classnames";
 import NoteFunctions from "@components/NoteFunctions";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
-  position?: "sticky" | "relative";
   openModal?: () => void;
   renderNoteFunctions?: boolean;
+  sideNaveToggleIcon?: boolean;
+  openSideNav?: () => void;
+  sideNavOpen?: boolean;
 }
 /**
  * return the heading element
@@ -13,31 +15,31 @@ interface Props {
  * @returns the heading as jsx element
  */
 function Heading({
-  position = "relative",
   openModal,
   renderNoteFunctions = true,
+  sideNaveToggleIcon = false,
+  openSideNav,
+  sideNavOpen,
 }: Props) {
-  const { logoutUser } = useAuth();
-
-  function handleClickLogout() {
-    logoutUser();
-  }
-
-  const cx = classNames(position, { "top-0 z-1": position === "sticky" });
-
   return (
     <header
-      className={`${cx} color-brand bg-brand-primary-400 flex flex-col justify-start h-150px w-100vw border-b-1px border-brand border-b-solid`}
+      className={
+        "sticky top-0 z-10 flex-grow-0 flex-shrink-1 flex-basis-auto color-brand bg-brand-primary-400 flex flex-col justify-start border-b-1px border-brand border-b-solid"
+      }
     >
       <div className="flex">
         <h1 className="font-title font-bold font-size-title m-0 p-20px">
           Notify
         </h1>
-        <button className="" onClick={handleClickLogout}>
-          <p>logout</p>
-        </button>
       </div>
 
+      {sideNaveToggleIcon && !sideNavOpen && (
+        <FontAwesomeIcon
+          className="cursor-pointer absolute left-20px bottom-20px hover:text-brand-secundary-300"
+          icon={faBars}
+          onClick={openSideNav}
+        />
+      )}
       {renderNoteFunctions && <NoteFunctions openModal={openModal} />}
     </header>
   );

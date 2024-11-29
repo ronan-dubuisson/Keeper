@@ -26,6 +26,7 @@ export function AuthProvider({ children }: Props) {
     });
 
     if (error) {
+      setLoading(false);
       throw error;
     }
 
@@ -55,6 +56,7 @@ export function AuthProvider({ children }: Props) {
   function registerUser() {}
 
   async function logoutUser() {
+    console.log("logout user called");
     try {
       await supabase.auth.signOut({ scope: "local" });
       setUser(undefined);

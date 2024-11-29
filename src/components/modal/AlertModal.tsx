@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import Border from "../ui/branding/Border";
+import Border from "../ui/Border";
 
 interface Props {
   message: string;

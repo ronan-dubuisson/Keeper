@@ -8,7 +8,7 @@ import {
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { NoteRow } from "@src/types";
 import { useNotes } from "@src/hooks/useNotes";
-import Border from "./ui/branding/Border";
+import Border from "./ui/Border";
 
 interface Props {
   note: NoteRow;
