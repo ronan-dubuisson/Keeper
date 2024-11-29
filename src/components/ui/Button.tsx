@@ -1,4 +1,4 @@
-import Border from "./branding/Border";
+import Border from "./Border";
 
 interface Props {
   value: string;

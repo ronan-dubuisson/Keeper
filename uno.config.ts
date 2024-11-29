@@ -43,10 +43,11 @@ export default defineConfig({
       getCSS: () => `
       body{
         margin: 0;
+        background-color: #ccc;
+        color: #122D36;
       }
 
       #root {
-        background-color: #ccc;
         padding: 0;
         margin: 0;
         display: flex;
@@ -62,7 +63,6 @@ export default defineConfig({
       {
         "box-shadow": "0 2px 5px #ccc",
         "background-color": "#fff",
-        color: "#023047ff",
       },
     ],
     [

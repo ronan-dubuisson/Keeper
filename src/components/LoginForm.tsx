@@ -11,7 +11,7 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import Button from "./ui/Button";
-import Border from "./ui/branding/Border";
+import Border from "./ui/Border";
 import AlertModal from "./modal/AlertModal";
 
 /**
