@@ -11,13 +11,17 @@ type Props = PropsWithChildren;
 export function AuthProvider({ children }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>();
+  const [lastError, setLastError] = useState<string>("");
 
   useQuery({
     queryFn: () => checkUserStatus(),
     queryKey: ["user"],
   });
 
-  async function loginWithPassword(userName: string, password: string) {
+  async function loginWithPassword(
+    userName: string,
+    password: string
+  ): Promise<string | null> {
     setLoading(true);
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -27,27 +31,28 @@ export function AuthProvider({ children }: Props) {
 
     if (error) {
       setLoading(false);
-      throw error;
+      return `${error.status}: ${error.message}`;
+    } else {
+      setUser(data.user);
+      setLoading(false);
+      setLastError("");
+      return null;
     }
-
-    setUser(data.user);
-    setLoading(false);
   }
 
   async function oauthLogin(provider: Provider) {
     setLoading(true);
 
-    try {
-      const { data } = await supabase.auth.signInWithOAuth({
-        provider: provider,
-        options: {
-          redirectTo: import.meta.env.VITE_BASE_URL,
-        },
-      });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: provider,
+      options: {
+        redirectTo: import.meta.env.VITE_BASE_URL,
+      },
+    });
 
-      console.log(data);
-    } catch (error) {
-      console.error(error); // Failure to login
+    if (error) {
+      console.log(error);
+      setLoading(false);
     }
 
     setLoading(false);
@@ -56,12 +61,13 @@ export function AuthProvider({ children }: Props) {
   function registerUser() {}
 
   async function logoutUser() {
-    console.log("logout user called");
-    try {
-      await supabase.auth.signOut({ scope: "local" });
+    const { error } = await supabase.auth.signOut({ scope: "local" });
+
+    if (error) {
+      return { error: { status: error.status, message: error.message } };
+    } else {
       setUser(undefined);
-    } catch (error) {
-      console.error(error); // Failure to logout
+      return { error: null };
     }
   }
 
@@ -79,6 +85,7 @@ export function AuthProvider({ children }: Props) {
 
   const contextData = {
     user,
+    lastError,
     loginWithPassword,
     oauthLogin,
     registerUser,

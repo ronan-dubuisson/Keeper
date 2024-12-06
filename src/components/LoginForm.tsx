@@ -19,8 +19,8 @@ import Alert from "./Alert";
  * @returns the login form
  */
 function LoginForm() {
-  const { user, loginWithPassword } = useAuth();
-  const [isAlertOpen, setIsAlertOpen] = useState(true);
+  const { user, loginWithPassword, lastError } = useAuth();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,11 +38,9 @@ function LoginForm() {
 
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    try {
-      loginWithPassword(credentials.userName, credentials.password);
-    } catch (error) {
-      console.log(error);
-    }
+    loginWithPassword(credentials.userName, credentials.password);
+
+    if (lastError) setIsAlertOpen(true);
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -102,7 +100,7 @@ function LoginForm() {
             </div>
             <Alert
               isOpen={isAlertOpen}
-              message="Temporary Alert Message"
+              message={lastError}
               closeModal={() => setIsAlertOpen(false)}
               timeToDisplayMilliSeconds={3000}
             />
