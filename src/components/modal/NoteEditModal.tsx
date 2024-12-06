@@ -42,7 +42,7 @@ function NoteEditModal({ isOpen, closeModal }: Props) {
   if (!isOpen) return null;
 
   return (
-    <div className="w-100% h-100% flex flex-justify-center flex-items-center bg-brand backdrop-blur bg-opacity-70 fixed z-10">
+    <div className="top-0 bottom-0 left-0 right-0 flex flex-justify-center flex-items-center bg-brand backdrop-blur bg-opacity-70 fixed z-10">
       <form
         onSubmit={handleSubmit}
         className="bg-white border-solid border-rd-10px border-1px w-550px flex flex-col flex-justify-start flex-items-center p-10 color-brand relative"

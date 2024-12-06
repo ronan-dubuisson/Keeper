@@ -1,30 +1,24 @@
-import Note from "@src/components/NoteCard";
+import Note from "@components/NoteCard";
 import Heading from "@components/Heading";
 import Footer from "@components/Footer";
-import NoteEditModal from "@src/components/modal/NoteEditModal";
-import { useEffect, useState } from "react";
-import { useNotes } from "@src/hooks/useNotes";
+import NoteEditModal from "@components/modal/NoteEditModal";
+import { useState } from "react";
+import { useNotes } from "@hooks/useNotes";
 import { NoteRow } from "@src/types";
 import { useQuery } from "react-query";
-import Sidebar from "@src/components/Sidebar";
+import SidebarModal from "@components/modal/SidebarModal";
 import classNames from "classnames";
-import { useCookies } from "react-cookie";
+import { createPortal } from "react-dom";
 
 function Home() {
   const [isNoteEditOpen, setNoteEditOpen] = useState(false);
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const { notes, clearCurrentNote, fetchNotes } = useNotes();
-  const [cookies, setCookie] = useCookies(["defaultSideNavOpenState"]);
-
   /** FETCH NOTES TO NOTES CONTEXT WITH REACT-QUERY*/
   const notesQuery = useQuery({
     queryFn: () => fetchNotes(),
     queryKey: ["notes"],
   });
-
-  useEffect(() => {
-    setIsSideNavOpen(cookies.defaultSideNavOpenState);
-  }, [cookies.defaultSideNavOpenState]);
 
   if (notesQuery.isLoading) {
     return <div>Loading...</div>;
@@ -34,11 +28,7 @@ function Home() {
     "flex",
     "flex-col",
     "min-h-100vh",
-    "transition-margin-300",
-    {
-      "ml-200px": isSideNavOpen,
-      "ml-0": !isSideNavOpen,
-    }
+    "transition-margin-300"
   );
 
   // on query completed
@@ -46,7 +36,7 @@ function Home() {
     <>
       <div className={pageStyle}>
         <Heading
-          openModal={() => setNoteEditOpen(true)}
+          openModal={openNoteEdit}
           sideNaveToggleIcon={true}
           openSideNav={() => setIsSideNavOpen(true)}
           sideNavOpen={isSideNavOpen}
@@ -62,30 +52,32 @@ function Home() {
             ))}
         </div>
         <Footer />
+
+        {createPortal(
+          <SidebarModal
+            isOpen={isSideNavOpen}
+            closeNav={() => setIsSideNavOpen(false)}
+          />,
+          document.body
+        )}
+
+        {createPortal(
+          <NoteEditModal
+            isOpen={isNoteEditOpen}
+            closeModal={() => {
+              setNoteEditOpen(false);
+              clearCurrentNote();
+            }}
+          />,
+          document.body
+        )}
       </div>
-
-      <Sidebar
-        defaultSideNavOpenState={cookies.defaultSideNavOpenState}
-        setDefaultSideNavOpenState={setDefaultSideNavOpenState}
-        isOpen={isSideNavOpen}
-        closeNav={() => setIsSideNavOpen(false)}
-      />
-
-      <NoteEditModal
-        isOpen={isNoteEditOpen}
-        closeModal={() => {
-          setNoteEditOpen(false);
-          clearCurrentNote();
-        }}
-      />
     </>
   );
 
-  function setDefaultSideNavOpenState() {
-    setCookie(
-      "defaultSideNavOpenState",
-      cookies.defaultSideNavOpenState ? !cookies.defaultSideNavOpenState : true
-    );
+  function openNoteEdit() {
+    setNoteEditOpen(true);
+    setIsSideNavOpen(false);
   }
 }
 

@@ -5,16 +5,15 @@ interface Props {
   children: ReactNode;
   highlight?: boolean;
   shadow?: boolean;
-  borderRadius?: boolean;
+  borderRadius?: "SMALL" | "BIG";
 }
 
-function Border({ children, borderRadius = true, highlight, shadow }: Props) {
+function Border({ children, borderRadius = "BIG", highlight, shadow }: Props) {
   const cx = classNames(
-    "h-inherit",
-    "relative",
     "overflow-hidden",
     "outline-solid",
-    { "border-rd-10px": borderRadius },
+    { "border-rd-5px": borderRadius === "SMALL" },
+    { "border-rd-10px": borderRadius === "BIG" },
     { "outline-color-brand outline-1px": !highlight },
     { "outline-brand-secundary-300 outline-2px": highlight },
     { "shadow-brand": shadow }
