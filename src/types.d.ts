@@ -16,7 +16,8 @@ export type NoteUpdate = TablesUpdate<"notes">;
 export type UserContextType =
   | {
       user: TAccount | null;
-      loginWithPassword: (userName: string, password: string) => void;
+      lastError: string;
+      loginWithPassword: (userName: string, password: string) => string;
       oauthLogin: (provider: Provider) => void;
       registerUser: () => void;
       logoutUser: () => void;
