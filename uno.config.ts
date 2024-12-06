@@ -72,6 +72,7 @@ export default defineConfig({
           "4px 4px 10px rgba(36,79,92,0.5), -4px -4px 5px rgba(184, 229, 247,0.5) ",
       },
     ],
+    ["fs-modal", {"position": "absolute", "top":0, "bottom": 0, "left": 0, "right": 0}],
     ["font-light", { "font-weight": "100" }],
     ["font-regular", { "font-weight": "400" }],
     ["font-bold", { "font-weight": "700" }],

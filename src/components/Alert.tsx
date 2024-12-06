@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
-import Border from "../ui/Border";
+import Border from "./ui/Border";
+import Positioning from "./ui/Positioning";
 
 interface Props {
   message: string;
@@ -8,7 +9,7 @@ interface Props {
   closeModal: () => void;
 }
 
-function AlertModal({
+function Alert({
   message,
   timeToDisplayMilliSeconds,
   isOpen,
@@ -24,11 +25,13 @@ function AlertModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-150px flex justify-center w-100vw">
-      <Border>
-        <div className="text-brand fixed mt-20px">{message}</div>
+    <Positioning position="absolute" location="TOP">
+      <Border borderRadius="SMALL">
+        <div className="bg-brand-primary-400 text-brand-secundary-300 p-10px">
+          {message}
+        </div>
       </Border>
-    </div>
+    </Positioning>
   );
 
   async function delay(ms: number) {
@@ -36,4 +39,4 @@ function AlertModal({
   }
 }
 
-export default AlertModal;
+export default Alert;

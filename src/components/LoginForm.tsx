@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Button from "./ui/Button";
 import Border from "./ui/Border";
-import AlertModal from "./modal/AlertModal";
+import Alert from "./Alert";
 
 /**
  * Handles dynamic status of the login form
@@ -57,7 +57,7 @@ function LoginForm() {
         <Border shadow={true}>
           <form
             onSubmit={handleSubmit}
-            className=" w-550px h-480px bg-white p-40px flex flex-col flex-items-center justify-around font-primary color-brand"
+            className="relative w-550px h-480px bg-white p-40px flex flex-col flex-items-center justify-around font-primary color-brand"
           >
             <div>
               <h1 className="m-0 font-bold font-size-medium">Sign In</h1>
@@ -100,15 +100,15 @@ function LoginForm() {
                 <BrandLoginIcon name="twitter" icon={faXTwitter} />
               </div>
             </div>
+            <Alert
+              isOpen={isAlertOpen}
+              message="Temporary Alert Message"
+              closeModal={() => setIsAlertOpen(false)}
+              timeToDisplayMilliSeconds={3000}
+            />
           </form>
         </Border>
       </div>
-      <AlertModal
-        isOpen={isAlertOpen}
-        message="Temporary Alert Message"
-        closeModal={() => setIsAlertOpen(false)}
-        timeToDisplayMilliSeconds={3000}
-      />
     </>
   );
 }
