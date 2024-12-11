@@ -1,6 +1,7 @@
 import { defineConfig } from "unocss";
 import { presetUno } from "unocss";
 import { presetWebFonts } from "unocss";
+import customRules from './src/utils/unoCss/unoCssRules.json'
 
 export default defineConfig({
   // ...UnoCSS options
@@ -62,17 +63,19 @@ export default defineConfig({
       "note",
       {
         "box-shadow": "0 2px 5px #ccc",
-        "background-color": "#fff",
-      },
+        "background-color": "#fff"
+      }
     ],
     [
       "shadow-brand",
       {
         "box-shadow":
-          "4px 4px 10px rgba(36,79,92,0.5), -4px -4px 5px rgba(184, 229, 247,0.5) ",
-      },
+          "4px 4px 10px rgba(36,79,92,0.5), -4px -4px 5px rgba(184, 229, 247,0.5) "
+      }
     ],
-    ["fs-modal", {"position": "absolute", "top":0, "bottom": 0, "left": 0, "right": 0}],
+    //MODAL
+    ["fs-modal", {"position": "absolute", "top":0, "bottom": 0, "left": 0, "right": 0, "z-index": 20}],
+    //FONTS
     ["font-light", { "font-weight": "100" }],
     ["font-regular", { "font-weight": "400" }],
     ["font-bold", { "font-weight": "700" }],
@@ -80,5 +83,5 @@ export default defineConfig({
     ["font-size-medium", { "font-size": "1.5rem" }],
     ["font-size-normal", { "font-size": "1rem" }],
     ["font-size-small", { "font-size": "0.8rem" }],
-  ],
+]
 });

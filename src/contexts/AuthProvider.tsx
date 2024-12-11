@@ -11,7 +11,7 @@ type Props = PropsWithChildren;
 export function AuthProvider({ children }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User>();
-  const [lastError, setLastError] = useState<string>("");
+  const [lastError, setLastError] = useState<string | null>(null);
 
   useQuery({
     queryFn: () => checkUserStatus(),
@@ -21,22 +21,19 @@ export function AuthProvider({ children }: Props) {
   async function loginWithPassword(
     userName: string,
     password: string
-  ): Promise<string | null> {
-    setLoading(true);
-
+  ): Promise<boolean> {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: userName,
       password: password,
     });
 
     if (error) {
-      setLoading(false);
-      return `${error.status}: ${error.message}`;
+      setLastError(`Status ${error.status}: ${error.message}`);
+      return false;
     } else {
       setUser(data.user);
-      setLoading(false);
-      setLastError("");
-      return null;
+      setLastError(null);
+      return true;
     }
   }
 
@@ -83,9 +80,14 @@ export function AuthProvider({ children }: Props) {
     setLoading(false);
   }
 
+  function clearError() {
+    setLastError("");
+  }
+
   const contextData = {
     user,
     lastError,
+    clearError,
     loginWithPassword,
     oauthLogin,
     registerUser,
