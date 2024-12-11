@@ -9,6 +9,7 @@ interface Props {
 
 function Positioning({ position, children, location }: Props) {
   const style = classNames(
+    "w-100%",
     position,
     { "top-0": location === "TOP" },
     { "right-0": location === "RIGHT" },

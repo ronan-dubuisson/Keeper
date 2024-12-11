@@ -32,5 +32,5 @@
       "@assets/*": ["src/assets/*"]
     }
   },
-  "include": ["src", "database.types.ts"]
+  "include": ["src", "database.types.ts", "uno.config.ts"]
 }

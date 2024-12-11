@@ -12,16 +12,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Button from "./ui/Button";
 import Border from "./ui/Border";
-import Alert from "./Alert";
+import Error from "./ui/Alert";
 
 /**
  * Handles dynamic status of the login form
  * @returns the login form
  */
 function LoginForm() {
-  const { user, loginWithPassword, lastError } = useAuth();
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-
+  const { user, loginWithPassword, lastError, clearError } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,9 +36,8 @@ function LoginForm() {
 
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    loginWithPassword(credentials.userName, credentials.password);
 
-    if (lastError) setIsAlertOpen(true);
+    loginWithPassword(credentials.userName, credentials.password);
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -52,18 +49,27 @@ function LoginForm() {
   return (
     <>
       <div className="flex justify-center flex-items-center w-100vw my-auto ">
-        <Border shadow={true}>
+        <Border shadow={true} borderRadius="SMALL">
           <form
             onSubmit={handleSubmit}
             className="relative w-550px h-480px bg-white p-40px flex flex-col flex-items-center justify-around font-primary color-brand"
           >
+            <Error
+              type="ERROR"
+              isOpen={lastError ? true : false}
+              message={lastError}
+              closeModal={() => {
+                clearError();
+              }}
+            />
+
             <div>
               <h1 className="m-0 font-bold font-size-medium">Sign In</h1>
             </div>
             <div>
               <InputText
                 type="text"
-                placeholder={"Enter Username"}
+                placeholder={"Enter e-mail"}
                 onChange={handleChange}
                 value={credentials.userName}
                 name={"userName"}
@@ -71,7 +77,7 @@ function LoginForm() {
               />
               <InputText
                 type="password"
-                placeholder={"Enter Password"}
+                placeholder={"Enter password"}
                 onChange={handleChange}
                 value={credentials.password}
                 name={"password"}
@@ -98,12 +104,6 @@ function LoginForm() {
                 <BrandLoginIcon name="twitter" icon={faXTwitter} />
               </div>
             </div>
-            <Alert
-              isOpen={isAlertOpen}
-              message={lastError}
-              closeModal={() => setIsAlertOpen(false)}
-              timeToDisplayMilliSeconds={3000}
-            />
           </form>
         </Border>
       </div>

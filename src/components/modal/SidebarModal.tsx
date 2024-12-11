@@ -20,8 +20,6 @@ function SidebarModal({ isOpen, closeNav }: Props) {
 
   /**STYLING */
   const navStyle = classNames(
-    "z-20",
-    "fixed",
     "fs-modal",
     "bg-brand-primary-400",
     "overflow-hidden",

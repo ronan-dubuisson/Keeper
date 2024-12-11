@@ -10,7 +10,7 @@ interface Props {
 
 function TextArea({ name, value, placeholder, onChange }: Props) {
   return (
-    <Border sides="ALL">
+    <Border>
       <textarea
         placeholder={placeholder}
         rows={20}
