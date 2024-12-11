@@ -3,7 +3,7 @@ import InputText from "../ui/InputText";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import TextArea from "../ui/textArea";
 import Button from "../ui/Button";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNotes } from "@src/hooks/useNotes";
 
 interface Props {
@@ -13,10 +13,16 @@ interface Props {
 
 function NoteEditModal({ isOpen, closeModal }: Props) {
   const { insertNote, currentNoteToEdit, updateNote } = useNotes();
-  const [note, setNote] = useState({
-    title: currentNoteToEdit?.title ? currentNoteToEdit.title : "",
-    content: currentNoteToEdit?.content ? currentNoteToEdit.content : "",
-  });
+  const [note, setNote] = useState({ title: "", content: "" });
+
+  useEffect(() => {
+    if (currentNoteToEdit) {
+      setNote({
+        title: currentNoteToEdit.title,
+        content: currentNoteToEdit.content,
+      });
+    }
+  }, [currentNoteToEdit]);
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
