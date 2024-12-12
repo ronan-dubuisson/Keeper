@@ -59,9 +59,7 @@ function Note({ note, openNoteEdit }: Props) {
         <div className="flex justify-between mt-auto">
           <ControlIcon icon={faTrashCan} onClick={() => {}} />
           <p className="m-0 font-size-small">
-            {formatTimeStamp(
-              note.last_updated_on ? note.last_updated_on : note.created_on
-            )}
+            {`last updated: ${formatTimeStamp(note.last_updated_on)}`}
           </p>
         </div>
       </div>

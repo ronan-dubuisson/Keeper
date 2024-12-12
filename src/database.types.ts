@@ -15,7 +15,7 @@ export type Database = {
           created_on: string
           id: string
           is_done: boolean
-          last_updated_on: string | null
+          last_updated_on: string
           title: string
           user_uuid: string
         }
@@ -24,7 +24,7 @@ export type Database = {
           created_on?: string
           id?: string
           is_done?: boolean
-          last_updated_on?: string | null
+          last_updated_on: string
           title: string
           user_uuid: string
         }
@@ -33,7 +33,7 @@ export type Database = {
           created_on?: string
           id?: string
           is_done?: boolean
-          last_updated_on?: string | null
+          last_updated_on?: string
           title?: string
           user_uuid?: string
         }
