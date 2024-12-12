@@ -3,6 +3,7 @@ import { NoteContextType, NoteInsert, NoteRow, NoteUpdate } from "@src/types";
 import supabase from "@src/utils/supabaseConfig";
 import { format } from "date-fns";
 import { createContext, PropsWithChildren, useState } from "react";
+import { useQuery } from "react-query";
 
 const NoteContext = createContext<NoteContextType>(undefined);
 type props = PropsWithChildren;
@@ -11,6 +12,19 @@ export function NoteContextProvider({ children }: props) {
   const [notes, setNotes] = useState<NoteRow[]>([]);
   const [currentNoteToEdit, setCurrentNoteToEdit] = useState<NoteRow>();
   const { user } = useAuth();
+
+  const notesQuery = useQuery({
+    queryFn: () => fetchNotes(),
+    queryKey: ["notes"],
+  });
+
+  if (notesQuery.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  function getNoteById(id: string): NoteRow {
+    return notes[findIndex(id)];
+  }
 
   async function fetchNotes() {
     if (user) {
@@ -55,8 +69,8 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
-  function setEditNoteId(id: string) {
-    const note = notes.find((note) => note?.id === id);
+  function setEditNote(id: string) {
+    const note = notes[findIndex(id)];
 
     if (note) {
       setCurrentNoteToEdit(note);
@@ -84,8 +98,20 @@ export function NoteContextProvider({ children }: props) {
         throw new Error("Note could note be updated");
       }
 
-      return data;
+      const updatedNotes = notes.map((note) => {
+        if (note.id === id) {
+          return data[0];
+        } else {
+          return note;
+        }
+      });
+
+      setNotes(updatedNotes);
     }
+  }
+
+  function findIndex(id: string) {
+    return notes.findIndex((note) => note.id === id);
   }
 
   function formatTimeStamp(dateTime: string): string {
@@ -95,10 +121,10 @@ export function NoteContextProvider({ children }: props) {
 
   const contextData = {
     notes,
-    fetchNotes,
+    getNoteById,
     currentNoteToEdit,
     insertNote,
-    setEditNoteId,
+    setEditNote,
     clearCurrentNote,
     updateNote,
     formatTimeStamp,

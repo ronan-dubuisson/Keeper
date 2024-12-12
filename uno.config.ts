@@ -1,7 +1,6 @@
 import { defineConfig } from "unocss";
 import { presetUno } from "unocss";
 import { presetWebFonts } from "unocss";
-import customRules from './src/utils/unoCss/unoCssRules.json'
 
 export default defineConfig({
   // ...UnoCSS options

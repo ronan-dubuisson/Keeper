@@ -6,9 +6,9 @@ import {
   faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
-import { NoteRow } from "@src/types";
 import { useNotes } from "@src/hooks/useNotes";
 import Border from "./ui/Border";
+import { NoteRow } from "@src/types";
 
 interface Props {
   note: NoteRow;
@@ -21,8 +21,7 @@ interface Props {
 function Note({ note, openNoteEdit }: Props) {
   const [isDone, setIsDone] = useState(note.is_done);
   const [isMouseOver, setIsMouseOver] = useState(false);
-  const { formatTimeStamp } = useNotes();
-  const { updateNote, setEditNoteId } = useNotes();
+  const { formatTimeStamp, updateNote, setEditNote } = useNotes();
 
   function handleStateChange() {
     setIsDone(!isDone);
@@ -30,7 +29,7 @@ function Note({ note, openNoteEdit }: Props) {
   }
 
   function handleEditNote() {
-    setEditNoteId(note.id);
+    setEditNote(note.id);
     openNoteEdit();
   }
 

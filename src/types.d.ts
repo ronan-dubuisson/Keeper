@@ -28,11 +28,11 @@ export type UserContextType =
 export type NoteContextType =
   | {
       notes: NoteRow[];
-      fetchNotes: () => void;
+      getNoteById : (id: string) => NoteRow;
       currentNoteToEdit: NoteRow | undefined;
       insertNote: (title: string, content: string) => Promise<void>;
       updateNote: (id: string, fieldsToUpdate: NoteUpdate) => Promise<noteRow>;
-      setEditNoteId: (id: string) => void;
+      setEditNote: (id: string) => void;
       clearCurrentNote: () => void;
       formatTimeStamp: (dateTime: string) => string;
     }
