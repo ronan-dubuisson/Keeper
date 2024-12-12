@@ -47,7 +47,9 @@ function Home() {
               <Note
                 key={note.id}
                 note={note}
-                openNoteEdit={() => setNoteEditOpen(true)}
+                openNoteEdit={() => {
+                  setNoteEditOpen(true);
+                }}
               />
             ))}
         </div>

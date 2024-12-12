@@ -21,6 +21,8 @@ function NoteEditModal({ isOpen, closeModal }: Props) {
         title: currentNoteToEdit.title,
         content: currentNoteToEdit.content,
       });
+    } else {
+      setNote({ title: "", content: "" });
     }
   }, [currentNoteToEdit]);
 
