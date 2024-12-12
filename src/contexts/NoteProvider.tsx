@@ -18,14 +18,15 @@ export function NoteContextProvider({ children }: props) {
     queryKey: ["notes"],
   });
 
+  if (notesQuery.error) {
+    throw notesQuery.error;
+  }
+
   if (notesQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
-  function getNoteById(id: string): NoteRow {
-    return notes[findIndex(id)];
-  }
-
+  /** DATABASE FUNCTIONS */
   async function fetchNotes() {
     if (user) {
       const { data, error } = await supabase.from("notes").select();
@@ -69,20 +70,6 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
-  function setEditNote(id: string) {
-    const note = notes[findIndex(id)];
-
-    if (note) {
-      setCurrentNoteToEdit(note);
-    } else {
-      throw Error(`note with id:${id} does not exist`);
-    }
-  }
-
-  function clearCurrentNote() {
-    setCurrentNoteToEdit(undefined);
-  }
-
   async function updateNote(id: string, fieldsToUpdate: NoteUpdate) {
     if (user) {
       const { data, error } = await supabase
@@ -110,6 +97,21 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
+  /**HELPER FUNCTIONS */
+  function setEditNote(id: string) {
+    const note = notes[findIndex(id)];
+
+    if (note) {
+      setCurrentNoteToEdit(note);
+    } else {
+      throw Error(`note with id:${id} does not exist`);
+    }
+  }
+
+  function clearCurrentNote() {
+    setCurrentNoteToEdit(undefined);
+  }
+
   function findIndex(id: string) {
     return notes.findIndex((note) => note.id === id);
   }
@@ -121,7 +123,6 @@ export function NoteContextProvider({ children }: props) {
 
   const contextData = {
     notes,
-    getNoteById,
     currentNoteToEdit,
     insertNote,
     setEditNote,
