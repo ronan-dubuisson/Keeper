@@ -11,6 +11,10 @@ type props = PropsWithChildren;
 export function NoteContextProvider({ children }: props) {
   const [notes, setNotes] = useState<NoteRow[]>([]);
   const [currentNoteToEdit, setCurrentNoteToEdit] = useState<NoteRow>();
+  const [sort] = useState<{
+    by: "CREATED_DATE" | "LAST_UPDATED" | "TITLE";
+    order: "DESC" | "ASC";
+  }>({ by: "CREATED_DATE", order: "DESC" });
   const { user } = useAuth();
 
   const notesQuery = useQuery({
@@ -22,10 +26,7 @@ export function NoteContextProvider({ children }: props) {
     return <div>Loading...</div>;
   }
 
-  function getNoteById(id: string): NoteRow {
-    return notes[findIndex(id)];
-  }
-
+  /** DATABASE FUNCTIONS */
   async function fetchNotes() {
     if (user) {
       const { data, error } = await supabase.from("notes").select();
@@ -34,7 +35,7 @@ export function NoteContextProvider({ children }: props) {
         throw error;
       }
 
-      setNotes(data);
+      setNotes(sortNotes(data));
     } else {
       throw Error("user needs to be logged in before fetching notes");
     }
@@ -62,25 +63,11 @@ export function NoteContextProvider({ children }: props) {
       }
 
       if (data !== null) {
-        setNotes([...notes, data[0]]);
+        setNotes(sortNotes([...notes, data[0]]));
       } else {
         throw new Error("Data is Null!");
       }
     }
-  }
-
-  function setEditNote(id: string) {
-    const note = notes[findIndex(id)];
-
-    if (note) {
-      setCurrentNoteToEdit(note);
-    } else {
-      throw Error(`note with id:${id} does not exist`);
-    }
-  }
-
-  function clearCurrentNote() {
-    setCurrentNoteToEdit(undefined);
   }
 
   async function updateNote(id: string, fieldsToUpdate: NoteUpdate) {
@@ -106,8 +93,63 @@ export function NoteContextProvider({ children }: props) {
         }
       });
 
-      setNotes(updatedNotes);
+      setNotes(sortNotes(updatedNotes));
     }
+  }
+
+  /**HELPER FUNCTIONS */
+  function sortNotes(notes: NoteRow[]) {
+    let sortedNotes: NoteRow[];
+
+    switch (true) {
+      case sort.by === "CREATED_DATE" && sort.order === "ASC":
+        sortedNotes = notes.toSorted((a, b) =>
+          a.created_on.localeCompare(b.created_on)
+        );
+        break;
+      case sort.by === "CREATED_DATE" && sort.order === "DESC":
+        sortedNotes = notes.toSorted((a, b) =>
+          b.created_on.localeCompare(a.created_on)
+        );
+        break;
+      case sort.by === "LAST_UPDATED" && sort.order === "ASC":
+        sortedNotes = notes.toSorted((a, b) =>
+          a.last_updated_on.localeCompare(b.last_updated_on)
+        );
+        break;
+      case sort.by === "LAST_UPDATED" && sort.order === "DESC":
+        sortedNotes = notes.toSorted((a, b) =>
+          b.last_updated_on.localeCompare(a.last_updated_on)
+        );
+        break;
+      case sort.by === "TITLE" && sort.order === "ASC":
+        sortedNotes = notes.toSorted((a, b) => a.title.localeCompare(b.title));
+        break;
+      case sort.by === "TITLE" && sort.order === "DESC":
+        sortedNotes = notes.toSorted((a, b) => b.title.localeCompare(a.title));
+        break;
+      default:
+        sortedNotes = notes.toSorted((a, b) =>
+          b.created_on.localeCompare(a.created_on)
+        );
+        break;
+    }
+
+    return sortedNotes;
+  }
+
+  function setEditNote(id: string) {
+    const note = notes[findIndex(id)];
+
+    if (note) {
+      setCurrentNoteToEdit(note);
+    } else {
+      throw Error(`note with id:${id} does not exist`);
+    }
+  }
+
+  function clearCurrentNote() {
+    setCurrentNoteToEdit(undefined);
   }
 
   function findIndex(id: string) {
@@ -121,7 +163,6 @@ export function NoteContextProvider({ children }: props) {
 
   const contextData = {
     notes,
-    getNoteById,
     currentNoteToEdit,
     insertNote,
     setEditNote,
