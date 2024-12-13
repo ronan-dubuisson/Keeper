@@ -30,17 +30,20 @@ function Home() {
           openSideNav={() => setIsSideNavOpen(true)}
           sideNavOpen={isSideNavOpen}
         />
-        <div className="mt-10 mb-auto mx-10% flex flex-wrap gap-lg justify-center font-primary">
-          {notes.length > 0 &&
-            notes.map((note: NoteRow) => (
-              <Note
-                key={note.id}
-                note={note}
-                openNoteEdit={() => {
-                  setNoteEditOpen(true);
-                }}
-              />
-            ))}
+        <div>
+          <Toolbar />
+          <div className="mt-10 mb-auto mx-10% flex flex-wrap gap-lg justify-center font-primary">
+            {notes.length > 0 &&
+              notes.map((note: NoteRow) => (
+                <Note
+                  key={note.id}
+                  note={note}
+                  openNoteEdit={() => {
+                    setNoteEditOpen(true);
+                  }}
+                />
+              ))}
+          </div>
         </div>
         <Footer />
 
