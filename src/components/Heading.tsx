@@ -1,4 +1,3 @@
-import NoteFunctions from "@components/NoteFunctions";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,33 +13,20 @@ interface Props {
  * @param position - optional position - default is relative
  * @returns the heading as jsx element
  */
-function Heading({
-  openModal,
-  renderNoteFunctions = true,
-  sideNaveToggleIcon = false,
-  openSideNav,
-  sideNavOpen,
-}: Props) {
+function Heading({ openSideNav }: Props) {
   return (
     <header
       className={
-        "sticky top-0 z-10 flex-grow-0 flex-shrink-1 flex-basis-auto color-brand bg-brand-primary-400 flex flex-col justify-start border-b-1px border-brand border-b-solid"
+        "top-0 z-10 color-brand bg-brand-primary-400 flex flex-col flex-items-start gap-5 border-b-1px border-brand border-b-solid p-20px"
       }
     >
-      <div className="flex">
-        <h1 className="font-title font-bold font-size-title m-0 p-20px">
-          Notify
-        </h1>
-      </div>
+      <h1 className="font-title font-bold font-size-title m-0 ">Notify</h1>
 
-      {sideNaveToggleIcon && !sideNavOpen && (
-        <FontAwesomeIcon
-          className="cursor-pointer absolute left-20px bottom-20px hover:text-brand-secundary-300"
-          icon={faBars}
-          onClick={openSideNav}
-        />
-      )}
-      {renderNoteFunctions && <NoteFunctions openModal={openModal} />}
+      <FontAwesomeIcon
+        className="cursor-pointer left-20px bottom-20px hover:text-brand-secundary-300"
+        icon={faBars}
+        onClick={openSideNav}
+      />
     </header>
   );
 }

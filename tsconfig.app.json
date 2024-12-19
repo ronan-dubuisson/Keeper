@@ -29,7 +29,6 @@
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src", "database.types.ts", "uno.config.ts"]

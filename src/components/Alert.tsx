@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
-import Border from "./Border";
+import Border from "@components/ui/Border";
 
 interface Props {
   type: "ERROR" | "INFO" | "WARNING";
@@ -43,7 +43,7 @@ function Alert({ type, message, isOpen, closeModal }: Props) {
   );
 
   return (
-    <Border visible={isOpen} additionalStyling={alertStyling}>
+    <Border visible={isOpen} styling={alertStyling}>
       <FontAwesomeIcon
         className={iconStyle}
         icon={faXmark}
