@@ -10,9 +10,9 @@ import {
   faGoogle,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import Button from "./ui/Button";
-import Border from "./ui/Border";
-import Error from "./ui/Alert";
+import Button from "@components/ui/Button";
+import Border from "@components/ui/Border";
+import Error from "@components/Alert";
 
 /**
  * Handles dynamic status of the login form

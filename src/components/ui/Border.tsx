@@ -6,7 +6,7 @@ interface Props {
   highlight?: boolean;
   shadow?: boolean;
   borderRadius?: "SMALL" | "BIG";
-  additionalStyling?: string;
+  styling?: string;
   visible?: boolean;
 }
 
@@ -15,7 +15,7 @@ function Border({
   borderRadius = "SMALL",
   highlight = false,
   shadow = false,
-  additionalStyling,
+  styling,
   visible = true,
 }: Props) {
   const cx = classNames(
@@ -27,7 +27,7 @@ function Border({
     { "outline-brand-secundary-300 outline-2px": highlight },
     { "shadow-brand": shadow },
     { "outline-0!": !visible },
-    additionalStyling
+    styling
   );
 
   return <div className={cx}>{children}</div>;

@@ -2,12 +2,13 @@ import Note from "@components/NoteCard";
 import Heading from "@components/Heading";
 import Footer from "@components/Footer";
 import NoteEditModal from "@components/modal/NoteEditModal";
+import SidebarModal from "@components/modal/SidebarModal";
+import Toolbar from "@src/components/notes-toolbar/Toolbar";
 import { useState } from "react";
 import { useNotes } from "@hooks/useNotes";
 import { NoteRow } from "@src/types";
-import SidebarModal from "@components/modal/SidebarModal";
-import classNames from "classnames";
 import { createPortal } from "react-dom";
+import classNames from "classnames";
 
 function Home() {
   const [isNoteEditOpen, setNoteEditOpen] = useState(false);
@@ -25,13 +26,12 @@ function Home() {
     <>
       <div className={pageStyle}>
         <Heading
-          openModal={openNoteEdit}
           sideNaveToggleIcon={true}
           openSideNav={() => setIsSideNavOpen(true)}
           sideNavOpen={isSideNavOpen}
         />
         <div>
-          <Toolbar />
+          <Toolbar openNoteEditModal={openNoteEdit} />
           <div className="mt-10 mb-auto mx-10% flex flex-wrap gap-lg justify-center font-primary">
             {notes.length > 0 &&
               notes.map((note: NoteRow) => (
