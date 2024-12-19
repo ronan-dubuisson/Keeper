@@ -97,6 +97,18 @@ export function NoteContextProvider({ children }: props) {
     }
   }
 
+  async function deleteNote(id: string) {
+    const { error } = await supabase.from("notes").delete().eq("id", id);
+
+    if (error) {
+      throw new Error("Note could note be updated");
+    }
+
+    const updatedNotes = notes.filter((note) => note.id !== id);
+
+    setNotes(sortNotes(updatedNotes));
+  }
+
   /**HELPER FUNCTIONS */
   function sortNotes(notes: NoteRow[]) {
     let sortedNotes: NoteRow[];
@@ -165,9 +177,10 @@ export function NoteContextProvider({ children }: props) {
     notes,
     currentNoteToEdit,
     insertNote,
+    updateNote,
+    deleteNote,
     setEditNote,
     clearCurrentNote,
-    updateNote,
     formatTimeStamp,
   };
 

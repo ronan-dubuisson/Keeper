@@ -17,7 +17,7 @@ function Heading({ openSideNav }: Props) {
   return (
     <header
       className={
-        "top-0 z-10 color-brand bg-brand-primary-400 flex flex-col flex-items-start gap-5 border-b-1px border-brand border-b-solid p-20px"
+        "color-brand bg-brand-primary-400 flex flex-col flex-items-start gap-5 border-b-1px border-brand border-b-solid p-20px"
       }
     >
       <h1 className="font-title font-bold font-size-title m-0 ">Notify</h1>
