@@ -31,6 +31,7 @@ export type NoteContextType =
       currentNoteToEdit: NoteRow | undefined;
       insertNote: (title: string, content: string) => Promise<void>;
       updateNote: (id: string, fieldsToUpdate: NoteUpdate) => Promise<noteRow>;
+      deleteNote: (id: string) => void;
       setEditNote: (id: string) => void;
       clearCurrentNote: () => void;
       formatTimeStamp: (dateTime: string) => string;
